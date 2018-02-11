@@ -49,7 +49,7 @@ Three main parts including different functions in `tidyplus`
       - Can be used for both numeric and categorical predictions
 - `Markdown Table`:
   - `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, padding, and size of the table can be input by users.
-  - `md_data()`: This function converts a dataframe or matrix into a markdown table format. 
+  - `md_data()`: This function converts a dataframe or matrix into a markdown table format.
   - `md_reg()`: This function converts a regression model object into a nice-formatted markdown table.
 
 
@@ -62,7 +62,6 @@ Using Data Manipulation functionalities
 
 ## Existing features in R and Python ecosystem similar to `tidyplus`
 
-**R**
 
 * Data Manipulation
   - [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) and [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html) these R libraries have very powerful data wrangling tools but with `tidyplus` user can explicitly perform string processing/ datatype conversion without affecting the overall column type (which is convenient when you have really messed up data with mix of strings and numbers)

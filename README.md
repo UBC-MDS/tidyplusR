@@ -81,4 +81,4 @@ Using Data Manipulation functionalities
 ## Contributing
 This is an open source project. Please follow the guidelines below for contribution.
   - Open an issue for any feedback and suggestions.
-  - For contributing to the project, please refer to [Contributing](CONTRUBUTING.md) for details.
+  - For contributing to the project, please refer to [Contributing](CONTRIBUTING.md) for details.

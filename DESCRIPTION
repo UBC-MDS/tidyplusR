@@ -1,9 +1,19 @@
 Package: tidyplusR
-Title: What the Package Does (one line, title case)
+Title: An extension on tidyverse to perform specified tasks
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+      person("Xinbin", "Huang", email = "xbhuang93@hotmail.com", role = c("aut", "cre"),
+      person("Akshi", "Chaudhary", email = "xbhuang93@hotmail.com", role = c("aut"),
+      person("Tina", "Qian", email = "xbhuang93@hotmail.com", role = c("aut")
+      )
+Description: The tidyplus package is an essential data cleaning package with 
+      features like missing value treatment, data manipulation and displaying data as 
+      markdown table for documents. The package adds a few additional functionalities 
+      on the existing data wrangling packages in popular statistical softwares 
+      like R. The objective of this package is to provide a few specific functions 
+      to solve some of the pressing issues in data cleaning.
 Depends: R (>= 3.4.3)
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Suggests: testthat

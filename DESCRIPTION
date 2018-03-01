@@ -2,9 +2,9 @@ Package: tidyplusR
 Title: An extension on tidyverse to perform specified tasks
 Version: 0.0.0.9000
 Authors@R: c(
-      person("Xinbin", "Huang", email = "xbhuang93@hotmail.com", role = c("aut", "cre"),
-      person("Akshi", "Chaudhary", email = "xbhuang93@hotmail.com", role = c("aut"),
-      person("Tina", "Qian", email = "xbhuang93@hotmail.com", role = c("aut")
+      person("Xinbin", "Huang", email = "xbhuang93@hotmail.com", role = c("aut", "cre")),
+      person("Akshi", "Chaudhary", email = "xbhuang93@hotmail.com", role = c("aut")),
+      person("Tina", "Qian", email = "xbhuang93@hotmail.com", role = c("aut"))
       )
 Description: The tidyplus package is an essential data cleaning package with 
       features like missing value treatment, data manipulation and displaying data as 
@@ -17,3 +17,4 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat
+RoxygenNote: 6.0.1

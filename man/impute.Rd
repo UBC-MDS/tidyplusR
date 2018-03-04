@@ -2,39 +2,62 @@
 % Please edit documentation in R/impute.R
 \name{impute}
 \alias{impute}
-\title{
-Impute missing values with the mean/median/mode or \code{EM}
-}
-\description{
-When the mean/median/mode method is used: character vectors and factors are imputed with the mode.
-Numeric and integer vectors are imputed with the median.
-When the EM method is used imputed values are predicted using EM algorithm in  \code{compute} function.
-}
+\title{Impute missing values with the mean/median/mode or \code{EM}}
 \usage{
-impute(data, object = NULL, method = "EM")
+impute(data, object = NULL, method = "median/mode", flag = FALSE)
 }
-
 \arguments{
-  \item{data}{
-A data frame with dummies or numeric variables. When method=="median/mode" columns can be of type "character". When method="randomForest" columns cannot be of type "character"
+\item{data}{A data frame with factor or numeric variables. When columns are of type "character", method=="mode" . When method="EM" columns cannot be of type "character".}
+
+\item{object}{If NULL \code{impute} will call \code{compute} on the current data.}
+
+\item{method}{Either "mean/median/mode" or "EM". Only works if object = NULL, that is missing , NA}
 }
-
-\item{object}{Accept the output of a call to \code{compute}}
-
-\item{method}{Either "mean/median/mode" or "EM". Only works if object = NULL}
-
 \value{
 An imputed data frame.
 }
-\references{
-Matthijs Meire, Michel Ballings, Dirk Van den Poel, Maintainer: \email{Matthijs.Meire@UGent.be
+\description{
+When the mean/median/mode method is used: character vectors and factors are imputed with the mode. 
+Numeric and integer vectors are imputed with the mean/median.
+When the EM method is used predictors are first imputed with the mean and each variable is then predicted and imputed with that value.
+For predictive imputation using EM function is \code{compute}. Used to train model for imputation
+For imputing predicted values the function is \code{impute}. Used on data to impute the values by the \code{compute} function.
 }
-\author{
-Akshi Chaudhary, www.github.com/akshi8
+\examples{
+#Compute the values using EM for missing data and impute them in the dataset
+#For example:
+
+#Dummy dataset
+(data <- data.frame(v_int=as.integer(c(3,3,2,5,1,2,4,6)),
+                 v_num=as.numeric(c(4.1,NA,12.2,11,3.4,1.6,3.3,5.5)),
+                 v_fact=as.factor(c('one','two',NA,'two','two','one','two','two')),
+                 stringsAsFactors = FALSE))
+
+#Compute values on data
+#EM method
+values <- compute(data, method="EM")
+#mean/median/mode method
+values2 <- compute(data)
+
+#define new data for imputation
+(newdata <- data.frame(v_int=as.integer(c(1,1,2,NA)),
+                 v_num=as.numeric(c(1.1,NA,2.2,NA)),
+                 v_fact=as.factor(c('one','one','one',NA)),
+                 stringsAsFactors = FALSE))
+
+#locate the NA's
+is.na(newdata)
+#how many missings per variable?
+colSums(is.na(newdata))
+
+#Impute on newdata
+impute(newdata,object=values) #using EM values
+impute(newdata,object=values2) #using mean/median/mode values
+
 }
-
-
 \seealso{
 \code{\link{compute}}
 }
-
+\author{
+Akshi Chaudhary, Attribution: Matthijs Meire, Michel Ballings, Dirk Van den Poel, \email{Matthijs.Meire@UGent.be}
+}

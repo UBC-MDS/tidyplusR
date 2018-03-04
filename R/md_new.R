@@ -4,7 +4,7 @@
 #' Alignments and size of the table can be input by users.
 #'
 #' @param ncol,nrow number of columns and rows for the table
-#' @param align Column alignment: a character vector consisting of 'l' (left), 'c' (center) and/or 'r' (right). By default or if align = NULL, numeric columns are right-aligned, and other columns are left-aligned. If align = 'l', all columns are left aligned. e.t.c.
+#' @param align Column alignment: a character vector consisting of 'l' (left), 'c' (center) and/or 'r' (right). If align = 'l', all columns are left aligned. e.t.c.
 #' @param header A character vector of length = ncol to be used for the header of the table. Default NULL.
 #'
 #' @return A character vector of the table source code.

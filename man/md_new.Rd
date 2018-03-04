@@ -9,7 +9,7 @@ md_new(ncol = 2, nrow = 2, align = NULL, header = NA)
 \arguments{
 \item{ncol, nrow}{number of columns and rows for the table}
 
-\item{align}{Column alignment: a character vector consisting of 'l' (left), 'c' (center) and/or 'r' (right). By default or if align = NULL, numeric columns are right-aligned, and other columns are left-aligned. If align = 'l', all columns are left aligned. e.t.c.}
+\item{align}{Column alignment: a character vector consisting of 'l' (left), 'c' (center) and/or 'r' (right). If align = 'l', all columns are left aligned. e.t.c.}
 
 \item{header}{A character vector of length = ncol to be used for the header of the table. Default NULL.}
 }

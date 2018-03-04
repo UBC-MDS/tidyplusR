@@ -66,9 +66,15 @@ Three main parts including different functions in `tidyplus`
       - Can be used for both numeric and categorical predictions
 - `Markdown Table`:
 
-  - `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, padding, and size of the table can be input by users.
+  - `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, and size of the table can be input by users.
+    - Input: the size of table (number of rows and number of columns)
+    - Outpu:  a character vector of the source code.
   - `md_data()`: This function converts a dataframe or matrix into a markdown table format.
+    - Input: a matrix or dataframe
+    - Output: a character vector of the source code.
   - `md_reg()`: This function converts a regression model object into a nice-formatted markdown table.
+    - Input: a regression object (i.e. `lm`) and the type of outputs of the regression object.
+    - Output: a character vector of the source code.
 
 ## Example
 

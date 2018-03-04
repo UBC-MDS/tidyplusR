@@ -4,17 +4,19 @@
 \alias{md_new}
 \title{Create Markdown table skeleton}
 \usage{
-md_new(ncol = 2, nrow = 2, header = TRUE)
+md_new(ncol = 2, nrow = 2, align = NULL, header = NA)
 }
 \arguments{
 \item{ncol, nrow}{number of columns and rows for the table}
 
-\item{header}{include the head title or not}
+\item{align}{Column alignment: a character vector consisting of 'l' (left), 'c' (center) and/or 'r' (right). If align = 'l', all columns are left aligned. e.t.c.}
+
+\item{header}{A character vector of length = ncol to be used for the header of the table. Default NULL.}
 }
 \value{
 A character vector of the table source code.
 }
 \description{
-creates a bare bone for generating a markdown table.
-Alignments, padding, and size of the table can be input by users.
+Creates a bare bone for generating a markdown table.
+Alignments and size of the table can be input by users.
 }

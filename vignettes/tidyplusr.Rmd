@@ -1,0 +1,19 @@
+---
+title: "TidyplusR"
+author: "Xinbin Huang, Akshi Chaudhary, Tian Qian"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The tidyplus package is an essential data cleaning package with features like missing value treatment, data manipulation and displaying data as markdown table for documents. The package adds a few additional functionalities on the existing data wrangling packages in popular statistical softwares like R. The objective of this package is to provide a few specific functions to solve some of the pressing issues in data cleaning.

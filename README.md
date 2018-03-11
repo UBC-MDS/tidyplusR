@@ -25,7 +25,7 @@
 ## Latest
 
 * Date : Feb 11, 2018
-* Release : v1.0
+* Release : v3
 
 ## About
 
@@ -40,7 +40,7 @@ You can install tidyplusR from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("xinbinhuang/tidyplusR")
+devtools::install_github("UBC-MDS/tidyplusR")
 ```
 
 
@@ -48,13 +48,11 @@ devtools::install_github("xinbinhuang/tidyplusR")
 ## Functions included:
 
 Three main parts including different functions in `tidyplus`
-- `Data Manipulation` : Datatype conversions and string processing
+- `Data Manipulation` : Datatype cleansing
   - `typemix`
-    * The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be the name of the columns that have mixed types of data, all data types in the columns and the number of observations for each data type.
+    * The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.
   - `cleanmix`
-    * The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. Here, the input will be the name of the column (a vector of the name of columns) that they want to clean, and the type of data they want to keep. The observations in other types in the columns will be Na.
-  - `emphasizeon`
-    * The function helps to emphasize some factors of interest by grouping other less important factors together. The input of the function will be a vector of n factors of interest and output will be a new column in original data frame that have n+1 factors, the n factors and one factor as "other".
+    * The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. Here, the input will be the output by `typemix` function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original one but with specified data type in certain columns deleted.
 
 - `Missing Value Treatment` : Basic Imputation and EM Imputation - `impute`
 
@@ -65,7 +63,6 @@ Three main parts including different functions in `tidyplus`
       - (Method = 'Mode') replace using mode
     * EM Imputation: **Bonus** (method = "EM")
       - Uses EM(Expectation- Maximization) algorithm to predict the closest value to the missing value
-      - Can be used for both numeric and categorical predictions
 - `Markdown Table`:
 
   - `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, and size of the table can be input by users.
@@ -82,8 +79,36 @@ Three main parts including different functions in `tidyplus`
 
 This is a basic example which shows you how to solve a common problem:
 
+
+#### Missing Value imputation 
+
+* This function requires a `dataframe` as an input for missing value treatmet using mean/median/mode
 ``` r
-## basic example code
+
+### Dummy dataframe
+dat <- data.frame(x=sample(letters[1:3],20,TRUE), 
+                                     y=sample(letters[1:3],20,TRUE),
+                                     w=rnorm(20),
+                                     z=sample(letters[1:3],20,TRUE), 
+                                     b = as.logical(sample(0:1,20,TRUE)),
+                                     a=rnorm(20),
+                                     stringsAsFactors=FALSE)
+  
+dat[c(5,10,15),1] <- NA
+dat[c(3,7),2] <- NA
+dat[c(1,3,5),3] <- NA
+dat[c(4,5,9),4] <- NA
+dat[c(4,5,9),5] <- NA
+dat[,4] <- factor(dat[,4] )
+dat[c(4,5,9),6] <- NA
+df <- c(1,2,3,NA)
+
+#### Calling impute function
+
+library(tidyplusR)
+
+impute(dat,method = "mode")  ## method can be replaced by median and mean as well
+
 ```
 
 

@@ -86,4 +86,3 @@ typemix<-function(df){
   # return the output
   return(return_list)
 }
-

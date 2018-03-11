@@ -60,7 +60,7 @@ typemix<-function(df){
     type_df[index,i]<-"logical"
     # the rest of data should be character if we do not consider complex
     count<-0
-    for (j in nrow(df)){
+    for (j in 1:nrow(df)){
           if (!is.na(df[j,i]) & is.na(type_df[j,i])){
                 type_df[j,i]<-"character"
                 count=count+1

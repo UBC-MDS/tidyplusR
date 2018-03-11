@@ -9,6 +9,7 @@ typemix_output2$X2<-as.character(typemix_output2$X2)
 typemix_output2$X3<-as.character(typemix_output2$X3)
 typemix_output2$X7<-as.character(typemix_output2$X7)
 typemix_output3<-read.csv("data/typemix_output3.csv",header = TRUE)
+typemix_output3$character<-as.numeric(typemix_output3$character)
 
 
 test_that("typemix is correct", {

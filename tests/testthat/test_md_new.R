@@ -22,7 +22,7 @@ test_that("md_new create empty markdown table", {
       expect_error(md_new(2,2, align = 123),"'align' must be a single character of possible values 'l', 'r', and 'c'")
       expect_error(md_new(2,2, "clc"),"'align' must be a single character of possible values 'l', 'r', and 'c'")
       expect_error(md_new(2,2, "d"),"'align' must be a single character of possible values 'l', 'r', and 'c'")
-      expect_error(md_new(2,2, l),"'align' must be a single character of possible values 'l', 'r', and 'c'")
+      expect_error(md_new(2,2, T),"'align' must be a single character of possible values 'l', 'r', and 'c'")
 
       # test: 'header' should be a character vector of 'length = ncol'
       expect_error(md_new(header = 1:2), "'header' should be a character vector of 'length = ncol'")

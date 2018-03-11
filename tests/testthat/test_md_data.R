@@ -50,7 +50,7 @@ test_that("md_data convert a matrix/dataframe to markdown table", {
       expect_error(md_data(x, align = 123),"'align' must be a single character of possible values 'l', 'r', and 'c'")
       expect_error(md_data(x, align = "clc"),"'align' must be a single character of possible values 'l', 'r', and 'c'")
       expect_error(md_data(x, align = "d"),"'align' must be a single character of possible values 'l', 'r', and 'c'")
-      expect_error(md_data(x, align = l),"'align' must be a single character of possible values 'l', 'r', and 'c'")
+      expect_error(md_data(x, align = T),"'align' must be a single character of possible values 'l', 'r', and 'c'")
 
       # test: 'header' should be a character vector of 'length = ncol'
       expect_error(md_data(x,header = 1:2), "'header' should be a character vector of 'length = ncol'")

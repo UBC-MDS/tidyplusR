@@ -89,7 +89,7 @@ md_data <- function(x, row.index = NA, col.index = NA, row.names = NA, header = 
             align = rep(align, length.out = m)
       if (row.names) {
             x = cbind(` ` = rownames(x), x)
-            if (!is.null(col.names))
+            if (!is.null(header))
                   header = c("    ", header)
             if (!is.null(align))
                   align = c("l", align)

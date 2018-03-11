@@ -14,12 +14,12 @@ test_that("md_data convert a matrix/dataframe to markdown table", {
       expect_equal(md_data(x, row.index = 1:2,col.index = 1:2),
                    structure(c("|    |a|b|", "|:---|---:|---:|", "|foo|1|2|","|zoo|4|5|"),class="md"  ))
 
-       expect_equal(md_data(x, row.names = F, header = c("A","B","C")),
-                    structure(c("|A|B|C|","|---:|---:|---:|", "|1|2|3|","|4|5|6|"),class="md" ))
+      expect_equal(md_data(x, row.names = F, header = c("A","B","C")),
+                   structure(c("|A|B|C|","|---:|---:|---:|", "|1|2|3|","|4|5|6|"),class="md" ))
 
-       expect_equal(md_data(x, align = "c"),structure(c("|    |a|b|c|","|:---|:--:|:--:|:--:|", "|foo|1|2|3|","|zoo|4|5|6|"    ),class="md"))
+      expect_equal(md_data(x, align = "c"),structure(c("|    |a|b|c|","|:---|:--:|:--:|:--:|", "|foo|1|2|3|","|zoo|4|5|6|"    ),class="md"))
 
-       # test data frame
+      # test data frame
       x <- as.data.frame(x)
 
       expect_equal(md_data(x),structure(c("|    |a|b|c|","|:---|---:|---:|---:|", "|foo|1|2|3|","|zoo|4|5|6|"    ),class="md"))

@@ -25,7 +25,7 @@
 ## Latest
 
 * Date : Feb 11, 2018
-* Release : v1.0
+* Release : v3
 
 ## About
 
@@ -40,7 +40,7 @@ You can install tidyplusR from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("xinbinhuang/tidyplusR")
+devtools::install_github("UBC-MDS/tidyplusR")
 ```
 
 
@@ -63,7 +63,6 @@ Three main parts including different functions in `tidyplus`
       - (Method = 'Mode') replace using mode
     * EM Imputation: **Bonus** (method = "EM")
       - Uses EM(Expectation- Maximization) algorithm to predict the closest value to the missing value
-      - Can be used for both numeric and categorical predictions
 - `Markdown Table`:
 
   - `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, and size of the table can be input by users.
@@ -80,8 +79,36 @@ Three main parts including different functions in `tidyplus`
 
 This is a basic example which shows you how to solve a common problem:
 
+
+#### Missing Value imputation 
+
+* This function requires a `dataframe` as an input for missing value treatmet using mean/median/mode
 ``` r
-## basic example code
+
+### Dummy dataframe
+dat <- data.frame(x=sample(letters[1:3],20,TRUE), 
+                                     y=sample(letters[1:3],20,TRUE),
+                                     w=rnorm(20),
+                                     z=sample(letters[1:3],20,TRUE), 
+                                     b = as.logical(sample(0:1,20,TRUE)),
+                                     a=rnorm(20),
+                                     stringsAsFactors=FALSE)
+  
+dat[c(5,10,15),1] <- NA
+dat[c(3,7),2] <- NA
+dat[c(1,3,5),3] <- NA
+dat[c(4,5,9),4] <- NA
+dat[c(4,5,9),5] <- NA
+dat[,4] <- factor(dat[,4] )
+dat[c(4,5,9),6] <- NA
+df <- c(1,2,3,NA)
+
+#### Calling impute function
+
+library(tidyplusR)
+
+impute(dat,method = "mode")  ## method can be replaced by median and mean as well
+
 ```
 
 

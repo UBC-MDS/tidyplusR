@@ -12,8 +12,10 @@ test_that("md_new create empty markdown table", {
 
       # expect_errors:
       ## test if 'ncol' and 'nrow' are a integer number
-      expect_error(md_new(1:2,2),"'ncol' and 'nrow' must be a integer number")
-      expect_error(md_new("ad",2), "'ncol' and 'nrow' must be a integer number")
+      expect_error(md_new(1:2,2),"'ncol' and 'nrow' must be a positive integer number")
+      expect_error(md_new("ad",2), "'ncol' and 'nrow' must be a positive integer number")
+      expect_error(md_new(0,2),"'ncol' and 'nrow' must be a positive integer number")
+      expect_error(md_new(-2,2), "'ncol' and 'nrow' must be a positive integer number")
 
 
       ## test: 'align' must be a single character of possible values 'l', 'r', and 'c'

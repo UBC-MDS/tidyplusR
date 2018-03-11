@@ -34,10 +34,10 @@ md_new <- function(nrow = 2, ncol = 2, align = NULL, header = NA){
 
       # Condition 3: check ncol and nrow
       if (class(c(ncol,nrow))== "numeric" && length(c(ncol, nrow))==2){
-            if (ncol %% 1 !=0 || nrow %%1 !=0){
-                  stop("'ncol' and 'nrow' must be a integer number")}
+            if (ncol %% 1 !=0 || nrow %%1 !=0 ||ncol<=0||nrow<=0){
+                  stop("'ncol' and 'nrow' must be a positive integer number")}
       } else {
-            stop("'ncol' and 'nrow' must be a integer number")
+            stop("'ncol' and 'nrow' must be a positive integer number")
       }
 
       # create table
@@ -70,8 +70,4 @@ md_new <- function(nrow = 2, ncol = 2, align = NULL, header = NA){
       return(structure(res, class = "md"))
 }
 
-#' @export
-print.md = function(x, ...) {
-      cat('\n')
-      cat(x, sep = '\n')
-}
+

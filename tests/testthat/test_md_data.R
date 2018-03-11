@@ -35,8 +35,10 @@ test_that("md_data convert a matrix/dataframe to markdown table", {
 
       # expected errors
       ## test if row.index and col.index are a vector of integer number
-      expect_error(md_data(x, row.index = c("c","b","d")),"'row.index' and 'col.index' must be a vector of integer number")
-      expect_error(md_data(x, row.index = 1:3, col.index = c(T,F,T)), "'row.index' and 'col.index' must be a vector of integer number")
+      expect_error(md_data(x, row.index = c("c","b","d")),"'row.index' and 'col.index' must be a vector of positive integer number")
+      expect_error(md_data(x, row.index = 1:3, col.index = c(T,F,T)), "'row.index' and 'col.index' must be a vector of positive integer number")
+      expect_error(md_data(x,-1:1), "'row.index' and 'col.index' must be a vector of positive integer number")
+      expect_error(md_data(x,0:1), "'row.index' and 'col.index' must be a vector of positive integer number")
 
       ## test 'row.names' should be logical vector of length 1
       expect_error(md_data(x, row.names = 1:3),"'row.names' should be logical vector of length 1")

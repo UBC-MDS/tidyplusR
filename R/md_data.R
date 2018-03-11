@@ -23,14 +23,14 @@ md_data <- function(x, row.index = NA, col.index = NA, row.names = NA, header = 
 
       # Condition 1: check row.index and col.index
       if (!identical(row.index,NA)){
-            if (class(row.index)!= "integer"){
-                        stop("'row.index' and 'col.index' must be a vector of integer number")
+            if (class(row.index)!= "integer"|| any(row.index<=0)){
+                        stop("'row.index' and 'col.index' must be a vector of positive integer number")
             }
       }
 
       if (!identical(col.index,NA)){
-            if (class(col.index)!= "integer"){
-                        stop("'row.index' and 'col.index' must be a vector of integer number")
+            if (class(col.index)!= "integer"||any(col.index<=0)){
+                        stop("'row.index' and 'col.index' must be a vector of positive integer number")
             }
       }
       # subsetting

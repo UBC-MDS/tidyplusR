@@ -69,9 +69,6 @@ Three main parts including different functions in `tidyplus` - `Data Manipulatio
 -   `md_data()`: This function converts a dataframe or matrix into a markdown table format.
     -   Input: a matrix or dataframe
     -   Output: a character vector of the source code.
--   `md_reg()`: This function converts a regression model object into a nice-formatted markdown table.
-    -   Input: a regression object (i.e. `lm`) and the type of outputs of the regression object.
-    -   Output: a character vector of the source code.
 
 Example
 -------
@@ -81,48 +78,8 @@ This is a basic example which shows you how to solve a common problem:
 #### Datatype cleansing
 
 The section has two functions, typemix and cleanmix.
-<<<<<<< HEAD
 
 -   The input for typemix function is a `data frame`, and the output is a list of 3 data frames. The first one is the same as the input data frame, the second one tells you the location and types of data in the columns where there is type mixture. The third data frame is a summary of the second data frame.
-=======
-
-- The input for typemix function is a `data frame`, and the output is a list of 3 data frames. The first one is the same as the input data frame, the second one tells you the location and types of data in the columns where there is type mixture. The third data frame is a summary of the second data frame.
-
-- The input for cleanmix function is the result from typemix function, the column(s) you want to work on, the type(s) of data you want to keep/delete, and if you want to keep/delete the instances specified. 
-
-```r
-dat<-data.frame(x1=c(1,2,3,"1.2.3"),
-                x2=c("test","test",1,TRUE),
-                x3=c(TRUE,TRUE,FALSE,FALSE))
-
-typemix(dat) #
-
-cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
-```
-
-#### Missing Value imputation
-
-* This function requires a `dataframe` as an input for missing value treatmet using mean/median/mode
-``` r
-
-### Dummy dataframe
-dat <- data.frame(x=sample(letters[1:3],20,TRUE),
-                                     y=sample(letters[1:3],20,TRUE),
-                                     w=rnorm(20),
-                                     z=sample(letters[1:3],20,TRUE),
-                                     b = as.logical(sample(0:1,20,TRUE)),
-                                     a=rnorm(20),
-                                     stringsAsFactors=FALSE)
-
-dat[c(5,10,15),1] <- NA
-dat[c(3,7),2] <- NA
-dat[c(1,3,5),3] <- NA
-dat[c(4,5,9),4] <- NA
-dat[c(4,5,9),5] <- NA
-dat[,4] <- factor(dat[,4] )
-dat[c(4,5,9),6] <- NA
-df <- c(1,2,3,NA)
->>>>>>> upstream/master
 
 -   The input for cleanmix function is the result from typemix function, the column(s) you want to work on, the type(s) of data you want to keep/delete, and if you want to keep/delete the instances specified.
 
@@ -169,6 +126,89 @@ dat\[c(5,10,15),1\] &lt;- NA dat\[c(3,7),2\] &lt;- NA dat\[c(1,3,5),3\] &lt;- NA
 #### Calling impute function
 
 impute(dat,method = "mode") \#\# method can be replaced by median and mean as well \`\`\`
+
+#### Markdown table
+
+-   `md_new()` can create an empty markdown table by specifing the number of columns and number of rows.
+
+``` r
+## default: ncol = 2 and nrow = 2, alignment = "l"
+md_new()
+#> 
+#> |    |    |
+#> |:---|:---|
+#> |    |    |
+#> |    |    |
+
+## 3 by 3 table
+md_new(nrow = 3, ncol = 3)
+#> 
+#> |    |    |    |
+#> |:---|:---|:---|
+#> |    |    |    |
+#> |    |    |    |
+#> |    |    |    |
+
+## different alignments:
+md_new(nrow = 1, align = "c")
+#> 
+#> |    |    |
+#> |:--:|:--:|
+#> |    |    |
+md_new(nrow = 1, align = "r")
+#> 
+#> |    |    |
+#> |---:|---:|
+#> |    |    |
+
+## providing header
+h <- c("foo", "boo")
+md_new(header = h)
+#> 
+#> | foo| boo|
+#> |:---|:---|
+#> |    |    |
+#> |    |    |
+```
+
+-   `md_data()` can create an markdown table given input as matrix of data frame.
+
+``` r
+md_data(mtcars, row.index = 1:3, col.index = 1:4)
+#> 
+#> |    |mpg|cyl|disp|hp|
+#> |:---|---:|---:|---:|---:|
+#> |Mazda RX4|21.0|6|160|110|
+#> |Mazda RX4 Wag|21.0|6|160|110|
+#> |Datsun 710|22.8|4|108|93|
+
+## alignment to right
+md_data(mtcars, row.index = 1:3, col.index = 1:4, align = "r")
+#> 
+#> |    |mpg|cyl|disp|hp|
+#> |:---|---:|---:|---:|---:|
+#> |Mazda RX4|21.0|6|160|110|
+#> |Mazda RX4 Wag|21.0|6|160|110|
+#> |Datsun 710|22.8|4|108|93|
+
+## provide header
+md_data(mtcars, row.index = 1:3, col.index = 1:4, header = c("a","b","c","d"))
+#> 
+#> |    |a|b|c|d|
+#> |:---|---:|---:|---:|---:|
+#> |Mazda RX4|21.0|6|160|110|
+#> |Mazda RX4 Wag|21.0|6|160|110|
+#> |Datsun 710|22.8|4|108|93|
+
+## not include row names
+md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
+#> 
+#> |mpg|cyl|disp|hp|
+#> |---:|---:|---:|---:|
+#> |21|6|160|110|
+#> |21|6|160|110|
+#> |22.8|4|108|93|
+```
 
 Used Scenario
 -------------

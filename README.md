@@ -15,7 +15,7 @@ TidyPlus: a tool for data wrangling
 
 [![issues](https://img.shields.io/github/issues/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/issues)
 
-[![Build Status](https://travis-ci.org/UBC-MDS/BlackBox_Python.svg?branch=master)](https://travis-ci.org/UBC-MDS/BlackBox_Python)
+[![Build Status](https://travis-ci.org/UBC-MDS/tidyplusR.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusR)
 
 Contributors:
 -------------
@@ -29,7 +29,7 @@ Latest
 ------
 
 -   Date : Feb 11, 2018
--   Release : v1.0
+-   Release : v3
 
 About
 -----
@@ -43,13 +43,13 @@ You can install tidyplusR from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("xinbinhuang/tidyplusR")
+devtools::install_github("UBC-MDS/tidyplusR")
 ```
 
 Functions included:
 -------------------
 
-Three main parts including different functions in `tidyplus` - `Data Manipulation` : Datatype conversions and string processing - `typemix` \* The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be the name of the columns that have mixed types of data, all data types in the columns and the number of observations for each data type. - `cleanmix` \* The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. Here, the input will be the name of the column (a vector of the name of columns) that they want to clean, and the type of data they want to keep. The observations in other types in the columns will be Na. - `emphasizeon` \* The function helps to emphasize some factors of interest by grouping other less important factors together. The input of the function will be a vector of n factors of interest and output will be a new column in original data frame that have n+1 factors, the n factors and one factor as "other".
+Three main parts including different functions in `tidyplus` - `Data Manipulation` : Datatype cleansing - `typemix` \* The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames. - `cleanmix` \* The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. Here, the input will be the output by `typemix` function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original one but with specified data type in certain columns deleted.
 
 -   `Missing Value Treatment` : Basic Imputation and EM Imputation - `impute`
 
@@ -60,22 +60,75 @@ Three main parts including different functions in `tidyplus` - `Data Manipulatio
     -   (Method = 'Mode') replace using mode
     -   EM Imputation: **Bonus** (method = "EM")
     -   Uses EM(Expectation- Maximization) algorithm to predict the closest value to the missing value
-    -   Can be used for both numeric and categorical predictions
 
 -   `Markdown Table`:
 
--   `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, padding, and size of the table can be input by users.
+-   `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, and size of the table can be input by users.
+    -   Input: the size of table (number of rows and number of columns)
+    -   Outpu: a character vector of the source code.
 -   `md_data()`: This function converts a dataframe or matrix into a markdown table format.
+    -   Input: a matrix or dataframe
+    -   Output: a character vector of the source code.
 -   `md_reg()`: This function converts a regression model object into a nice-formatted markdown table.
+    -   Input: a regression object (i.e. `lm`) and the type of outputs of the regression object.
+    -   Output: a character vector of the source code.
 
 Example
 -------
 
 This is a basic example which shows you how to solve a common problem:
 
+#### Datatype cleansing
+
+The section has two functions, typemix and cleanmix.
+
+-   The input for typemix function is a `data frame`, and the output is a list of 3 data frames. The first one is the same as the input data frame, the second one tells you the location and types of data in the columns where there is type mixture. The third data frame is a summary of the second data frame.
+
+-   The input for cleanmix function is the result from typemix function, the column(s) you want to work on, the type(s) of data you want to keep/delete, and if you want to keep/delete the instances specified.
+
 ``` r
-## basic example code
+library(tidyplusR)
+dat<-data.frame(x1=c(1,2,3,"1.2.3"),
+                x2=c("test","test",1,TRUE),
+                x3=c(TRUE,TRUE,FALSE,FALSE))
+
+typemix(dat) #
+#> [[1]]
+#>      x1   x2    x3
+#> 1     1 test  TRUE
+#> 2     2 test  TRUE
+#> 3     3    1 FALSE
+#> 4 1.2.3 TRUE FALSE
+#> 
+#> [[2]]
+#>          x1        x2 x3
+#> 1    number character NA
+#> 2    number character NA
+#> 3    number    number NA
+#> 4 character   logical NA
+#> 
+#> [[3]]
+#>   Column_ID number character logical
+#> 1         1      3         1       0
+#> 2         2      1         2       1
+
+cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
+#>     x1   x2    x3
+#> 1    1 test  TRUE
+#> 2    2 test  TRUE
+#> 3    3 <NA> FALSE
+#> 4 <NA> <NA> FALSE
 ```
+
+#### Missing Value imputation
+
+-   This function requires a `dataframe` as an input for missing value treatmet using mean/median/mode \`\`\`r \#\#\# Dummy dataframe dat &lt;- data.frame(x=sample(letters\[1:3\],20,TRUE), y=sample(letters\[1:3\],20,TRUE), w=rnorm(20), z=sample(letters\[1:3\],20,TRUE), b = as.logical(sample(0:1,20,TRUE)), a=rnorm(20), stringsAsFactors=FALSE)
+
+dat\[c(5,10,15),1\] &lt;- NA dat\[c(3,7),2\] &lt;- NA dat\[c(1,3,5),3\] &lt;- NA dat\[c(4,5,9),4\] &lt;- NA dat\[c(4,5,9),5\] &lt;- NA dat\[,4\] &lt;- factor(dat\[,4\] ) dat\[c(4,5,9),6\] &lt;- NA df &lt;- c(1,2,3,NA)
+
+#### Calling impute function
+
+impute(dat,method = "mode") \#\# method can be replaced by median and mean as well \`\`\`
 
 Used Scenario
 -------------

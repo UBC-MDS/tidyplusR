@@ -1,76 +1,25 @@
-# Impute
-#install.packages("testthat")
-library(testthat)
-
-context("Testing Input Outputs of Impute and Compute function")
-
-# Test should raise an error if input or output is unexpected.
-
-  # Load test data
- #Dummy dataset
- (data <- data.frame(v_int=as.integer(c(3,3,2,5,1,2,4,6)),
-                 v_num=as.numeric(c(4.1,NA,12.2,11,3.4,1.6,3.3,5.5)),
-                 v_fact=as.factor(c('one','two',NA,'two','two','one','two','two')),
-                  stringsAsFactors = FALSE))
+test_that("Expected outputs are correct - mean", {
   
-  (new_data <- data.frame(v_int=as.integer(c(3,3,2,5,1,2,4,6)),
-                      v_num=as.numeric(c(4.1,6,12.2,11,3.4,1.6,3.3,5.5)),
-                      v_fact=as.factor(c('one','two','two','two','two','one','two','two')),
-                      stringsAsFactors = FALSE))
+  dat1 <- read.csv("data/impute_data.csv")
+  newdat1 <- impute(dat1,method="mean")
+  meandat <- read.csv("data/meandat.csv")
+  expect_equal(newdat1, meandat)
   
-  method1 <- function(a){
-    if (a =="mode"){
-  object  <- data[,3]
-    } else {object  <- data[,2]}
-    return(object)
-  }
+})
+test_that("Expected outputs are correct - median", {
   
-  # These should raise an error.
-  test_that("dataframe object is not list or dataframe", {
-  # Expected outputs:
-  expect_equal(typeof(data), "list")
-  expect_equal(typeof(new_data), "list")
-  expect_equal(is.data.frame(data), TRUE)
-  expect_equal(is.data.frame(new_data), TRUE)
-  })
+  dat2 <- read.csv("data/impute_data.csv")
+  newdat2 <- impute(dat2,method="median")
+  mediandat <- read.csv("data/mediandat.csv")
+  expect_equal(newdat2, mediandat)
   
-  test_that("dataframe size miss match", {
-  expect_equal(length(data) == length(new_data), TRUE)
-  })
+})
+test_that("Expected outputs are correct - mode", {
   
+  dat3 <- read.csv("data/impute_data.csv")
+  newdat3 <- impute(dat3,method="mode")
+  modedat <- read.csv("data/modedat.csv")
+  modedat$b <- as.character(modedat$b)
+  expect_equal(newdat3, modedat)
   
-  ## Check NA in data
-  test_that("No missing values", {
-  expect_equal(any(is.na(data)), TRUE)
-  expect_equal(any(is.na(data[,1])), FALSE)
-  expect_equal(any(is.na(data[,2])), TRUE)
-  expect_equal(any(is.na(data[,3])), TRUE)
-  expect_equal(any(is.na(new_data)), FALSE)
-  expect_equal(any(is.na(object)), TRUE)
-  })
-  ## Test type of each column before passing as object to impute or compute
-  test_that("data type mismatch", {
-  expect_equal(class(data[,1]), "integer")
-  expect_equal(typeof(data[,2]), "double")
-  expect_equal(class(data[,2]), "numeric")
-  expect_equal(class(data[,3]), "integer")
-  expect_equal(class(data[,3]), "factor")
-  })
-  
-  ## Test if data type factor or character is using method = mode
-  #method1("mode")
-  test_that("method incorrect for factors and characters missing imputation", {
-    
-    expect_equal(class(method1("mode")), "factor")
-  })
-  
-  ## Test if data type numeric or integer is using method = mean
- # method1("mean")
-  test_that("datatype incorrect for mean/median/EM imputation",{
-    
-    expect_equal(class(method1("mean")), "numeric")
-    expect_equal(class(method1("median")), "numeric")
-    expect_equal(class(method1("EM")), "numeric")
-  })
-  
-  
+})

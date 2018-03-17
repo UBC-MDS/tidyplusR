@@ -27,3 +27,34 @@ test_that("Expected outputs are correct - mode", {
   expect_equal(newdat3, modedat)
   
 })
+
+
+
+
+# These should raise an error.
+test_that("dataframe object is not list or dataframe", {
+  data <- read.csv("data/impute_data.csv")
+  new_data <- impute(data,method="mean")
+  # Expected outputs:
+  expect_equal(typeof(data), "list")
+  expect_equal(typeof(new_data), "list")
+  expect_equal(is.data.frame(data), TRUE)
+  expect_equal(is.data.frame(new_data), TRUE)
+})
+
+test_that("dataframe size miss match", {
+  data <- read.csv("data/impute_data.csv")
+  new_data <- impute(data,method="mean")
+  expect_equal(length(data) == length(new_data), TRUE)
+})
+
+
+## Check NA in data
+test_that("No missing values", {
+  data <- read.csv("data/impute_data.csv")
+  new_data <- impute(data,method="mode")
+  expect_equal(any(is.na(data)), TRUE)
+  expect_equal(any(is.na(data[,2])), TRUE)
+  expect_equal(any(is.na(data[,3])), TRUE)
+  expect_equal(any(is.na(new_data)), FALSE)
+})

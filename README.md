@@ -167,13 +167,13 @@ dat[c(4,5,9),6] <- NA
 impute(dat,method = "mode") %>% head()
 ```
 
-    ##   x y     w z    b      a
-    ## 1 b b 30.88 a TRUE  99.00
-    ## 2 b b 25.00 c TRUE  86.00
-    ## 3 a c 30.88 b TRUE 100.00
-    ## 4 a c 21.00 a TRUE  82.99
-    ## 5 a a 30.88 a TRUE  82.99
-    ## 6 b c 10.00 a TRUE  85.00
+    ##   x y    w z     b     a
+    ## 1 b a 16.6 a FALSE 29.00
+    ## 2 a a 46.0 c  TRUE  6.00
+    ## 3 b a 16.6 c FALSE 10.00
+    ## 4 c c 22.0 a  TRUE 11.81
+    ## 5 c a 16.6 a  TRUE 11.81
+    ## 6 a a 12.0 a FALSE 14.00
 
 #### Markdown table
 
@@ -296,7 +296,7 @@ Existing features in R and Python ecosystem similar to `tidyplus`
 -   [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) and [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html) these R libraries have very powerful data wrangling tools but with `tidyplus` user can explicitly perform string processing/ datatype conversion without affecting the overall column type (which is convenient when you have really messed up data with mix of strings and numbers)
 
 -   Missing Value treatment
--   R doesn't have imputation methods which use `EM algorithm` for missing value treatment, which in fact is very efficient and accurate [MICE](https://cran.r-project.org/web/packages/mice/index.html) package in R do provide limited imputation using mean, mode, etc.
+-   R doesn't have imputation methods which use `Mode` for missing value treatment, which can be useful for categorical and numeric variables [MICE](https://cran.r-project.org/web/packages/mice/index.html) package in R do provide limited imputation using mean, median, etc.
 -   Markdown table in R
 -   R has library [`Kable`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) which can output a dataset in the form of a markdown table but with `tidyplus` user will have more freedom with data types and formatting.
 

@@ -75,6 +75,7 @@ impute <- function (data, method="methods"){
         d<- stats::density(data[,i],na.rm = TRUE)
         md <- d$x[which.max(d$y)]
         data[i][is.na(data[i])] <- md ## this step only replaces missing with mode for numeric cols
+        data[i] <- round(data[i],2)
         
       }
     }

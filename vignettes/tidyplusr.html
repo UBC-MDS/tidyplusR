@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Xinbin Huang, Akshi Chaudhary, Tian Qian" />
+
+<meta name="date" content="2018-03-16" />
+
+<title>TidyplusR</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">TidyplusR</h1>
+<h4 class="author"><em>Xinbin Huang, Akshi Chaudhary, Tian Qian</em></h4>
+<h4 class="date"><em>2018-03-16</em></h4>
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The <code>tidyplusR</code> package is an essential data cleaning package with features like missing value treatment, data manipulation and displaying data as markdown table for documents. The package adds a few additional functionality on the existing data wrangling packages in popular statistical software like R. The objective of this package is to provide a few specific functions to solve some of the pressing issues in data cleaning.</p>
+</div>
+<div id="contributors" class="section level1">
+<h1>Contributors:</h1>
+<ul>
+<li><code>Akshi Chaudhary</code> : <a href="https://github.com/akshi8">akshi8</a></li>
+<li><code>Tina Qian</code> : <a href="https://github.com/TinaQian2017">TinaQian2017</a></li>
+<li><code>Xinbin Huang</code>: <a href="https://github.com/xinbinhuang">xinbinhuang</a></li>
+</ul>
+</div>
+<div id="installation" class="section level1">
+<h1>Installation</h1>
+<p>You can install <code>tidyplusR</code> from github using the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;devtools&quot;)</span>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;UBC-MDS/tidyplusR&quot;</span>)</code></pre></div>
+</div>
+<div id="functions-included" class="section level1">
+<h1>Functions included:</h1>
+<div id="three-main-parts-including-different-functions-in-tidyplusr" class="section level4">
+<h4>Three main parts including different functions in <code>tidyplusR</code></h4>
+<ul>
+<li><code>Data Manipulation</code> : Datatype cleansing</li>
+<li><code>typemix</code>
+<ul>
+<li>The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.</li>
+</ul></li>
+<li><code>cleanmix</code>
+<ul>
+<li>The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns.</li>
+<li>Here, the input will be the output by <code>typemix</code> function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original type but with specified data type in certain columns deleted.</li>
+</ul></li>
+<li><p><code>Missing Value Treatment</code> : Basic Imputation using <code>impute</code></p>
+<ul>
+<li><p>Imputation: replace missing values in a column of a dataframe, or multiple columns of dataframe based on the <code>method</code> of imputation</p></li>
+<li><code>(Method = 'Mean')</code> replace using mean</li>
+<li><code>(Method = 'Median')</code> replace using median</li>
+<li><p><code>(Method = 'Mode')</code> replace using mode</p></li>
+</ul></li>
+<li><p><code>Markdown Table</code>:</p></li>
+<li><code>md_new()</code>: This function creates a bare bone for generating a markdown table. Alignments, and size of the table can be input by users.
+<ul>
+<li>Input: the size of table (number of rows and number of columns)</li>
+<li>Output: a character vector of the source code.</li>
+</ul></li>
+<li><code>md_data()</code>: This function converts a dataframe or matrix into a markdown table format.
+<ul>
+<li>Input: a matrix or dataframe</li>
+<li>Output: a character vector of the source code.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="examples" class="section level1">
+<h1>Examples</h1>
+<p>This is a basic example which shows you how to solve a common problem:</p>
+<div id="datatype-cleansing" class="section level4">
+<h4>Datatype cleansing</h4>
+<p>The section has two functions, typemix and cleanmix.</p>
+<ul>
+<li><p>The input for typemix function is a <code>data frame</code>, and the output is a list of 3 data frames. The first one is the same as the input data frame, the second one tells you the location and types of data in the columns where there is type mixture. The third data frame is a summary of the second data frame.</p></li>
+<li><p>The input for cleanmix function is the result from typemix function, the column(s) you want to work on, the type(s) of data you want to keep/delete, and if you want to keep/delete the instances specified.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyplusR)
+<span class="kw">library</span>(dplyr)
+
+dat&lt;-<span class="kw">data.frame</span>(<span class="dt">x1=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="st">&quot;1.2.3&quot;</span>),
+                <span class="dt">x2=</span><span class="kw">c</span>(<span class="st">&quot;test&quot;</span>,<span class="st">&quot;test&quot;</span>,<span class="dv">1</span>,<span class="ot">TRUE</span>),
+                <span class="dt">x3=</span><span class="kw">c</span>(<span class="ot">TRUE</span>,<span class="ot">TRUE</span>,<span class="ot">FALSE</span>,<span class="ot">FALSE</span>))
+<span class="co">#Input data with mixed datatypes</span>
+dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre></div>
+<pre><code>##      x1   x2    x3
+## 1     1 test  TRUE
+## 2     2 test  TRUE
+## 3     3    1 FALSE
+## 4 1.2.3 TRUE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Identified and cleaned(removed) datatypes based on the types mentioned</span>
+tidyplusR<span class="op">::</span><span class="kw">cleanmix</span>(<span class="kw">typemix</span>(dat),<span class="dt">column=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="dt">type=</span><span class="kw">c</span>(<span class="st">&quot;number&quot;</span>,<span class="st">&quot;character&quot;</span>))</code></pre></div>
+<pre><code>##     x1   x2    x3
+## 1    1 test  TRUE
+## 2    2 test  TRUE
+## 3    3 &lt;NA&gt; FALSE
+## 4 &lt;NA&gt; &lt;NA&gt; FALSE</code></pre>
+</div>
+<div id="missing-value-imputation" class="section level4">
+<h4>Missing Value imputation</h4>
+<ul>
+<li>This function requires a <code>dataframe</code> as an input for missing value treatment using mean/median/mode</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Dummy dataframe
+dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span><span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>],<span class="dv">20</span>,<span class="ot">TRUE</span>), 
+                  <span class="dt">y=</span><span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>],<span class="dv">20</span>,<span class="ot">TRUE</span>),
+                  <span class="dt">w=</span><span class="kw">as.numeric</span>(<span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">50</span>,<span class="dv">20</span>,<span class="ot">TRUE</span>)),
+                  <span class="dt">z=</span><span class="kw">sample</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>],<span class="dv">20</span>,<span class="ot">TRUE</span>), 
+                  <span class="dt">b =</span> <span class="kw">as.logical</span>(<span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,<span class="dv">20</span>,<span class="ot">TRUE</span>)),
+                  <span class="dt">a=</span><span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">100</span>,<span class="dv">20</span>,<span class="ot">TRUE</span>),
+                  <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+
+dat[<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>),<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+dat[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">7</span>),<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+dat[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>),<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+dat[<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">9</span>),<span class="dv">4</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+dat[<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">9</span>),<span class="dv">5</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+dat[,<span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">factor</span>(dat[,<span class="dv">4</span>] )
+dat[<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">9</span>),<span class="dv">6</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+<span class="co">#Input data with missing values</span>
+dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre></div>
+<pre><code>##      x    y  w    z     b  a
+## 1    b    b NA    a FALSE 24
+## 2    b    b 31    a  TRUE 57
+## 3    c &lt;NA&gt; NA    c  TRUE 23
+## 4    a    a 35 &lt;NA&gt;    NA NA
+## 5 &lt;NA&gt;    a NA &lt;NA&gt;    NA NA
+## 6    b    c 42    b FALSE 61</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">#### Calling impute function
+<span class="co">#Missing value replaced with method = mode</span>
+tidyplusR<span class="op">::</span><span class="kw">impute</span>(dat,<span class="dt">method =</span> <span class="st">&quot;mode&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()  ## method can be replaced by median and mean as well</code></pre></div>
+<pre><code>##   x y     w z     b     a
+## 1 b b 35.48 a FALSE 24.00
+## 2 b b 31.00 a  TRUE 57.00
+## 3 c a 35.48 c  TRUE 23.00
+## 4 a a 35.00 c  TRUE 58.72
+## 5 b a 35.48 c  TRUE 58.72
+## 6 b c 42.00 b FALSE 61.00</code></pre>
+</div>
+<div id="markdown-table" class="section level4">
+<h4>Markdown table</h4>
+<ul>
+<li><code>md_new()</code> can create an empty markdown table by specifying the number of columns and number of rows.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## default: ncol = 2 and nrow = 2, alignment = &quot;l&quot;
+<span class="kw">md_new</span>()</code></pre></div>
+<pre><code>## 
+## |    |    |
+## |:---|:---|
+## |    |    |
+## |    |    |</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## 3 by 3 table
+<span class="kw">md_new</span>(<span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</code></pre></div>
+<pre><code>## 
+## |    |    |    |
+## |:---|:---|:---|
+## |    |    |    |
+## |    |    |    |
+## |    |    |    |</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## different alignments:
+<span class="kw">md_new</span>(<span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">align =</span> <span class="st">&quot;c&quot;</span>)</code></pre></div>
+<pre><code>## 
+## |    |    |
+## |:--:|:--:|
+## |    |    |</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">md_new</span>(<span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">align =</span> <span class="st">&quot;r&quot;</span>)</code></pre></div>
+<pre><code>## 
+## |    |    |
+## |---:|---:|
+## |    |    |</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## providing header
+h &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;boo&quot;</span>)
+<span class="kw">md_new</span>(<span class="dt">header =</span> h)</code></pre></div>
+<pre><code>## 
+## | foo| boo|
+## |:---|:---|
+## |    |    |
+## |    |    |</code></pre>
+<ul>
+<li><code>md_data()</code> can create an markdown table given input as matrix of data frame.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">md_data</span>(mtcars, <span class="dt">row.index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">col.index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</code></pre></div>
+<pre><code>## 
+## |    |mpg|cyl|disp|hp|
+## |:---|---:|---:|---:|---:|
+## |Mazda RX4|21.0|6|160|110|
+## |Mazda RX4 Wag|21.0|6|160|110|
+## |Datsun 710|22.8|4|108|93|</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## alignment to right
+<span class="kw">md_data</span>(mtcars, <span class="dt">row.index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">col.index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">align =</span> <span class="st">&quot;r&quot;</span>)</code></pre></div>
+<pre><code>## 
+## |    |mpg|cyl|disp|hp|
+## |:---|---:|---:|---:|---:|
+## |Mazda RX4|21.0|6|160|110|
+## |Mazda RX4 Wag|21.0|6|160|110|
+## |Datsun 710|22.8|4|108|93|</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## provide header
+<span class="kw">md_data</span>(mtcars, <span class="dt">row.index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">col.index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">header =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>))</code></pre></div>
+<pre><code>## 
+## |    |a|b|c|d|
+## |:---|---:|---:|---:|---:|
+## |Mazda RX4|21.0|6|160|110|
+## |Mazda RX4 Wag|21.0|6|160|110|
+## |Datsun 710|22.8|4|108|93|</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## not include row names
+<span class="kw">md_data</span>(mtcars, <span class="dt">row.index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">col.index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">row.names =</span> F)</code></pre></div>
+<pre><code>## 
+## |mpg|cyl|disp|hp|
+## |---:|---:|---:|---:|
+## |21|6|160|110|
+## |21|6|160|110|
+## |22.8|4|108|93|</code></pre>
+</div>
+<div id="existing-features-in-r-ecosystem-similar-to-tidyplusr" class="section level2">
+<h2>Existing features in R ecosystem similar to <code>tidyplusR</code></h2>
+<ul>
+<li>Data Manipulation</li>
+<li><p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">dplyr</a> and <a href="https://cran.r-project.org/web/packages/tidyverse/index.html">tidyverse</a> these R libraries have very powerful data wrangling tools but with <code>tidyplus</code> user can explicitly perform string processing/ datatype conversion without affecting the overall column type (which is convenient when you have really messed up data with mix of strings and numbers)</p></li>
+<li>Missing Value treatment</li>
+<li>R doesn’t have imputation methods which use <code>EM algorithm</code> for missing value treatment, which in fact is very efficient and accurate <a href="https://cran.r-project.org/web/packages/mice/index.html">MICE</a> package in R do provide limited imputation using mean, mode, etc.</li>
+<li>Markdown table in R</li>
+<li><p>R has library <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html"><code>Kable</code></a> which can output a dataset in the form of a markdown table but with <code>tidyplus</code> user will have more freedom with data types and formatting.</p></li>
+</ul>
+</div>
+</div>
+<div id="license" class="section level1">
+<h1>License</h1>
+<p><a href="LICENSE.md">MIT</a></p>
+</div>
+<div id="contributing" class="section level1">
+<h1>Contributing</h1>
+<p>This is an open source project. Please follow the guidelines below for contribution. - Open an issue for any feedback and suggestions. - For contributing to the project, please refer to <a href="CONTRIBUTING.md">Contributing</a> for details.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,6 +1,8 @@
+context("Impute missing values in a dataframe")
+
+set.seed(0)
 
 test_that("Expected outputs are correct - mean", {
-
   
   dat1 <- read.csv("data/impute_data.csv")
   newdat1 <- impute(dat1,method="mean")
@@ -24,4 +26,4 @@ test_that("Expected outputs are correct - mode", {
   modedat$b <- as.character(modedat$b)
   expect_equal(newdat3, modedat)
   
-
+})

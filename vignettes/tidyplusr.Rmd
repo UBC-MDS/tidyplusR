@@ -33,7 +33,7 @@ devtools::install_github("UBC-MDS/tidyplusR")
 
 # Functions included:
 
-#### Three main parts including different functions in `tidyplusR`
+#### Three main parts include different functions in `tidyplusR`
 - `Data Manipulation` : Datatype cleansing
   - `typemix`
     * The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.

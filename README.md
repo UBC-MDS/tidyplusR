@@ -48,7 +48,7 @@ devtools::install_github("UBC-MDS/tidyplusR")
 Functions included:
 -------------------
 
-> Three main parts including different functions in `tidyplusR`
+> Three main parts include different functions in `tidyplusR`
 
 -   `Data Manipulation` : Datatype cleansing
 -   `typemix`
@@ -101,14 +101,14 @@ typemix(dat) #
     ## 2     2 test  TRUE
     ## 3     3    1 FALSE
     ## 4 1.2.3 TRUE FALSE
-    ## 
+    ##
     ## [[2]]
     ##          x1        x2 x3
     ## 1    number character NA
     ## 2    number character NA
     ## 3    number    number NA
     ## 4 character   logical NA
-    ## 
+    ##
     ## [[3]]
     ##   Column_ID number character logical
     ## 1         1      3         1       0
@@ -145,10 +145,10 @@ library(tidyverse)
 
 ``` r
 # Dummy dataframe
-dat <- data.frame(x=sample(letters[1:3],20,TRUE), 
+dat <- data.frame(x=sample(letters[1:3],20,TRUE),
                   y=sample(letters[1:3],20,TRUE),
                   w=as.numeric(sample(0:50,20,TRUE)),
-                  z=sample(letters[1:3],20,TRUE), 
+                  z=sample(letters[1:3],20,TRUE),
                   b = as.logical(sample(0:1,20,TRUE)),
                   a=sample(0:100,20,TRUE),
                   stringsAsFactors=FALSE)
@@ -184,7 +184,7 @@ impute(dat,method = "mode") %>% head()
 md_new()
 ```
 
-    ## 
+    ##
     ## |    |    |
     ## |:---|:---|
     ## |    |    |
@@ -195,7 +195,7 @@ md_new()
 md_new(nrow = 3, ncol = 3)
 ```
 
-    ## 
+    ##
     ## |    |    |    |
     ## |:---|:---|:---|
     ## |    |    |    |
@@ -207,7 +207,7 @@ md_new(nrow = 3, ncol = 3)
 md_new(nrow = 1, align = "c")
 ```
 
-    ## 
+    ##
     ## |    |    |
     ## |:--:|:--:|
     ## |    |    |
@@ -216,7 +216,7 @@ md_new(nrow = 1, align = "c")
 md_new(nrow = 1, align = "r")
 ```
 
-    ## 
+    ##
     ## |    |    |
     ## |---:|---:|
     ## |    |    |
@@ -227,7 +227,7 @@ h <- c("foo", "boo")
 md_new(header = h)
 ```
 
-    ## 
+    ##
     ## | foo| boo|
     ## |:---|:---|
     ## |    |    |
@@ -239,7 +239,7 @@ md_new(header = h)
 md_data(mtcars, row.index = 1:3, col.index = 1:4)
 ```
 
-    ## 
+    ##
     ## |    |mpg|cyl|disp|hp|
     ## |:---|---:|---:|---:|---:|
     ## |Mazda RX4|21.0|6|160|110|
@@ -251,7 +251,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4)
 md_data(mtcars, row.index = 1:3, col.index = 1:4, align = "r")
 ```
 
-    ## 
+    ##
     ## |    |mpg|cyl|disp|hp|
     ## |:---|---:|---:|---:|---:|
     ## |Mazda RX4|21.0|6|160|110|
@@ -263,7 +263,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, align = "r")
 md_data(mtcars, row.index = 1:3, col.index = 1:4, header = c("a","b","c","d"))
 ```
 
-    ## 
+    ##
     ## |    |a|b|c|d|
     ## |:---|---:|---:|---:|---:|
     ## |Mazda RX4|21.0|6|160|110|
@@ -275,7 +275,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, header = c("a","b","c","d"))
 md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
 ```
 
-    ## 
+    ##
     ## |mpg|cyl|disp|hp|
     ## |---:|---:|---:|---:|
     ## |21|6|160|110|

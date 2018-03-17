@@ -4,17 +4,10 @@
 #' When the mean/median/mode method is used: character vectors and factors are imputed with the mode. 
 
 #' @import stats
-
-#
-#' 
-
 #' @param data A data frame with factor or numeric variables. When columns are of type "character", method=="mode" . 
 #' @param method Either "mean/median/mode". Only works if object = NULL, that is missing , NA
 #' @details Numeric and integer vectors are imputed with the mean/median.For imputing missing values the function is \code{impute}. 
 #' @return An imputed dataframe {data} with method selected by user
-
-
-
 #' @examples
 #'
 #' #Dummy dataset
@@ -33,22 +26,31 @@
 #' dat[,4] <- factor(dat[,4] )
 #'#Usage
 #'impute(dat,method = "mean")
-
-
 #' @export
-#' 
 
 impute <- function (data, method="methods"){
   
- # classes <- c("character","double","integer","logical","numeric","data.frame")
-
-  if(is.numeric(data) | is.data.frame(data) | is.matrix(data) | is.character(data) | is.double(data))
+  methods <- c("mean","median","mode")
+  
+  if(method %in% methods)
   {
-    data <- data.frame(data)  ## convert all inputs to dataframe
-  } else {
-    stop("input can only be vector, matrix or dataframe")
+    if(is.numeric(data) | is.data.frame(data) | is.matrix(data) | is.character(data) | is.double(data)|is.logical(data))
+    {
+      data <- data.frame(data)  ## convert all inputs to dataframe
+    } else {
+      stop("input can only be vector, matrix or dataframe")
+    }
+  } else { stop("method can only be : mean, median, mode")
   }
 
+  
+  # if(is.numeric(data) | is.data.frame(data) | is.matrix(data) | is.character(data) | is.double(data)|is.logical(data))
+  # {
+  #   data <- data.frame(data)  ## convert all inputs to dataframe
+  # } else {
+  #   stop("input can only be vector, matrix or dataframe")
+  # }
+  
   
   if (method=="median") {
     for(i in 1:ncol(data)){
@@ -60,15 +62,6 @@ impute <- function (data, method="methods"){
     
   } else if (method=="mode") {
     
-    
-    a <- 0
-    mode_est <- function(a) {
-      
-      tab <- table(a)
-      l <- sum(is.na(a))
-      sample(names(tab)[tab==max(tab)], l, TRUE) ## this function find the most frequent occuring values for `mode`
-      
-    }
     
     
     
@@ -83,7 +76,7 @@ impute <- function (data, method="methods"){
           data[i][is.na(data[i])] <- mean(data[,i], na.rm = TRUE) ## if there are less than 2 values for mode just use mean
           
         } else {
-        
+          
           d<- stats::density(data[,i],na.rm = TRUE)
           md <- d$x[which.max(d$y)]
           data[i][is.na(data[i])] <- md ## this step only replaces missing with mode for numeric cols
@@ -114,4 +107,12 @@ impute <- function (data, method="methods"){
   
 }
 
+# Utility function for estimating mode 
 
+mode_est <- function(a) {
+  
+  tab <- table(a)
+  l <- sum(is.na(a))
+  sample(names(tab)[tab==max(tab)], l, TRUE) ## this function find the most frequent occuring values for `mode`
+  
+}

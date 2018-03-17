@@ -52,7 +52,7 @@ The `tidyplus` package is an essential data cleaning package with features like 
 You can install tidyplusR from github with:
 
 
-``` r
+```{r,eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("UBC-MDS/tidyplusR")
 ```
@@ -112,8 +112,8 @@ cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
 #### Missing Value imputation
 
 * This function requires a `dataframe` as an input for missing value treatmet using mean/median/mode
-```r
-### Dummy dataframe
+```{r}
+# Dummy dataframe
 dat <- data.frame(x=sample(letters[1:3],20,TRUE),
                                      y=sample(letters[1:3],20,TRUE),
                                      w=rnorm(20),
@@ -131,8 +131,9 @@ dat[,4] <- factor(dat[,4] )
 dat[c(4,5,9),6] <- NA
 df <- c(1,2,3,NA)
 
-#### Calling impute function
-impute(dat,method = "mode")  ## method can be replaced by median and mean as well
+# Calling impute function
+# method can be replaced by median and mean as well
+impute(dat,method = "mode")  
 ```
 
 #### Markdown table

@@ -40,22 +40,15 @@
 
 impute <- function (data, method="methods"){
   
-  classes <- c("character","double","integer","logical","numeric","data.frame")
+ # classes <- c("character","double","integer","logical","numeric","data.frame")
 
-  if(class(data) != classes[1]| class(data) != classes[2]| class(data) != classes[3]| class(data) != classes[4]| class(data) != classes[5]| class(data) != classes[6])
+  if(is.numeric(data) | is.data.frame(data) | is.matrix(data) | is.character(data) | is.double(data))
   {
+    data <- data.frame(data)  ## convert all inputs to dataframe
+  } else {
     stop("input can only be vector, matrix or dataframe")
   }
 
-  
-
-  
-  data <- data.frame(data) ## convert all inputs to dataframe
-  
-  if(class(data) != "data.frame")
-  {
-    stop("Cannot proceed, invalid input , only accepts vector, matrix or dataframe")
-  }
   
   if (method=="median") {
     for(i in 1:ncol(data)){
@@ -87,7 +80,7 @@ impute <- function (data, method="methods"){
         if(length(stats::na.omit(data[,i])) < 2)
         {
           
-          data[i][is.na(data[i])] <- mean(stats::na.omit(data[,i])) ## if there are less than 2 values for mode just use mean
+          data[i][is.na(data[i])] <- mean(data[,i], na.rm = TRUE) ## if there are less than 2 values for mode just use mean
           
         } else {
         

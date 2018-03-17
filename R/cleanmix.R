@@ -10,12 +10,17 @@
 #' @return A data frame with observations in unwanted data types in the columns specified deleted.
 #' @export
 #' @examples
-#' cleanmix(typemix(sample_df),c(1,2),type="number")
+#' sample_df<-data.frame(x1=c(1,2,3,"1.2.3"),
+#'                    x2=c("test","test",TRUE,100),
+#'                    x3=c(1,FALSE,"FALSE "," true"),
+#'                    x4=c(1,2,3,4),
+#'                    x5=c("t","t","t","t"),
+#'                    x6=c(TRUE,TRUE,FALSE,FALSE))
+#'
+#' cleanmix(typemix(sample_df),c(1,2),type=c("number","character"))
 #'
 #'
 cleanmix<-function(typemix_result,column,type,keep=TRUE){
-      # turn on warning function
-      options(warn = 1)
 
       # check input
       if (class(typemix_result)!="list"){

@@ -49,7 +49,7 @@ devtools::install_github("UBC-MDS/tidyplusR")
 
 ## Functions included:
 
-> Three main parts including different functions in `tidyplusR`
+> Three main parts include different functions in `tidyplusR`
 
 - `Data Manipulation` : Datatype cleansing
   - `typemix`

@@ -1,33 +1,36 @@
-context("Impute missing values in a dataframe")
 
-set.seed(0)
+context("Impute.R")
+
 
 ## check all functions working properly
 
 test_that("Expected outputs are correct - mean", {
+  set.seed(0)
   
   dat1 <- read.csv("data/impute_data.csv")
   newdat1 <- impute(dat1,method="mean")
   meandat <- read.csv("data/meandat.csv")
-  expect_equal(newdat1, meandat)
+  expect_equal(newdat1, meandat, tolerance=1e-3)
   
 })
 test_that("Expected outputs are correct - median", {
+  set.seed(0)
   
   dat2 <- read.csv("data/impute_data.csv")
   newdat2 <- impute(dat2,method="median")
   mediandat <- read.csv("data/mediandat.csv")
-  expect_equal(newdat2, mediandat)
+  expect_equal(newdat2, mediandat,tolerance=1e-3)
   
 })
 
 test_that("Expected outputs are correct - mode", {
+  set.seed(0)
   
   dat3 <- read.csv("data/impute_data.csv")
   newdat3 <- impute(dat3,method="mode")
   modedat <- read.csv("data/modedat.csv")
   modedat$b <- as.character(modedat$b)
-  expect_equal(newdat3, modedat)
+  expect_equal(newdat3, modedat,tolerance=1e-3)
   
 })
 
@@ -67,12 +70,19 @@ test_that("Expected Inputs are correct - mode", {
 
 test_that("Expected Inputs are correct - mode", {
   
-  m <-  sum()
+  m <-  function(x)123
   expect_error(impute(m,method = "mode") , "input can only be vector, matrix or dataframe")
   
 })
 
+## test if correct method input is entered
 
+test_that("Method input is correct - mean median mode", {
+  
+  n <-  c(1,2,3,4)
+  expect_error(impute(n,method = "xyz") , "method can only be : mean, median, mode")
+  
+})
 
 
 # These should raise an error.

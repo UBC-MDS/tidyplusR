@@ -21,9 +21,6 @@ typemix<-function(df){
     stop('The input should be a data frame or tibble')
   }
 
-  # ignore warnings
-  options(warn=-1)
-
   # locate the columns with type mixture
   ## I find that the columns with type mixture is put under factor;
   ## While the columns with only characters are also put under factor, so we need to exclude these cases.
@@ -32,8 +29,8 @@ typemix<-function(df){
   for (i in 1:dim(df)[2]){
     if (class(df[[i]])=="factor"){
       # identify the columns with only characters
-      a<-as.numeric(as.character(df[[i]]))
-      b<-as.logical(as.character(df[[i]]))
+      a<-suppressWarnings(as.numeric(as.character(df[[i]])))
+      b<-suppressWarnings(as.logical(as.character(df[[i]])))
       if (sum(sum(a,na.rm=TRUE),sum(b,na.rm = TRUE))!=0){
         columns_typemix<-append(columns_typemix,i)
       }
@@ -51,11 +48,11 @@ typemix<-function(df){
   total_character<-c()
   for (i in columns_typemix){
     # check if data is a number
-    index<-!is.na(as.numeric(as.character(df[[i]])))
+    index<-!is.na(suppressWarnings(as.numeric(as.character(df[[i]]))))
     total_number<-append(total_number,sum(index))
     type_df[index,i]<-"number"
     # check if data is logical
-    index<-!is.na(as.logical(as.character(df[[i]])))
+    index<-!is.na(suppressWarnings(as.logical(as.character(df[[i]]))))
     total_logical<-append(total_logical,sum(index))
     type_df[index,i]<-"logical"
     # the rest of data should be character if we do not consider complex

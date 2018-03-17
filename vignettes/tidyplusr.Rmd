@@ -72,13 +72,13 @@ The section has two functions, typemix and cleanmix.
 
 ```{r, message=FALSE, warning=FALSE}
 library(tidyplusR)
-library(dplyr)
+
 
 dat<-data.frame(x1=c(1,2,3,"1.2.3"),
                 x2=c("test","test",1,TRUE),
                 x3=c(TRUE,TRUE,FALSE,FALSE))
 #Input data with mixed datatypes
-dat %>% head()
+dat 
 
 
 ```
@@ -115,13 +115,13 @@ dat[c(4,5,9),5] <- NA
 dat[,4] <- factor(dat[,4] )
 dat[c(4,5,9),6] <- NA
 #Input data with missing values
-dat %>% head()
+dat 
 
 ```
 ```{r}
 #### Calling impute function
 #Missing value replaced with method = mode
-tidyplusR::impute(dat,method = "mode") %>% head()  ## method can be replaced by median and mean as well
+tidyplusR::impute(dat,method = "mode")   ## method can be replaced by median and mean as well
 ```
 
 

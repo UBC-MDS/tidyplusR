@@ -12,7 +12,7 @@
 
 <meta name="author" content="Xinbin Huang, Akshi Chaudhary, Tian Qian" />
 
-<meta name="date" content="2018-03-16" />
+<meta name="date" content="2018-03-17" />
 
 <title>TidyplusR</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">TidyplusR</h1>
 <h4 class="author"><em>Xinbin Huang, Akshi Chaudhary, Tian Qian</em></h4>
-<h4 class="date"><em>2018-03-16</em></h4>
+<h4 class="date"><em>2018-03-17</em></h4>
 
 
 
@@ -139,13 +139,13 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <li><p>The input for cleanmix function is the result from typemix function, the column(s) you want to work on, the type(s) of data you want to keep/delete, and if you want to keep/delete the instances specified.</p></li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyplusR)
-<span class="kw">library</span>(dplyr)
+
 
 dat&lt;-<span class="kw">data.frame</span>(<span class="dt">x1=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="st">&quot;1.2.3&quot;</span>),
                 <span class="dt">x2=</span><span class="kw">c</span>(<span class="st">&quot;test&quot;</span>,<span class="st">&quot;test&quot;</span>,<span class="dv">1</span>,<span class="ot">TRUE</span>),
                 <span class="dt">x3=</span><span class="kw">c</span>(<span class="ot">TRUE</span>,<span class="ot">TRUE</span>,<span class="ot">FALSE</span>,<span class="ot">FALSE</span>))
 <span class="co">#Input data with mixed datatypes</span>
-dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre></div>
+dat </code></pre></div>
 <pre><code>##      x1   x2    x3
 ## 1     1 test  TRUE
 ## 2     2 test  TRUE
@@ -181,24 +181,52 @@ dat[<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span
 dat[,<span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">factor</span>(dat[,<span class="dv">4</span>] )
 dat[<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">9</span>),<span class="dv">6</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
 <span class="co">#Input data with missing values</span>
-dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre></div>
-<pre><code>##      x    y  w    z     b  a
-## 1    b    b NA    a FALSE 24
-## 2    b    b 31    a  TRUE 57
-## 3    c &lt;NA&gt; NA    c  TRUE 23
-## 4    a    a 35 &lt;NA&gt;    NA NA
-## 5 &lt;NA&gt;    a NA &lt;NA&gt;    NA NA
-## 6    b    c 42    b FALSE 61</code></pre>
+dat </code></pre></div>
+<pre><code>##       x    y  w    z     b   a
+## 1     c    b NA    c FALSE 100
+## 2     a    b 47    b  TRUE  50
+## 3     a &lt;NA&gt; NA    b  TRUE  50
+## 4     b    b 40 &lt;NA&gt;    NA  NA
+## 5  &lt;NA&gt;    c NA &lt;NA&gt;    NA  NA
+## 6     b    c 46    c  TRUE  63
+## 7     b &lt;NA&gt; 22    a  TRUE  97
+## 8     b    a 12    c  TRUE  41
+## 9     a    c  4 &lt;NA&gt;    NA  NA
+## 10 &lt;NA&gt;    a 13    a  TRUE  21
+## 11    a    b 20    c  TRUE  27
+## 12    c    a 22    b  TRUE  31
+## 13    a    a 29    b  TRUE  38
+## 14    b    a  0    c FALSE  16
+## 15 &lt;NA&gt;    c 19    c  TRUE  41
+## 16    a    a 17    b FALSE   1
+## 17    c    a 20    b FALSE  56
+## 18    b    c  9    a  TRUE  26
+## 19    c    a 39    c  TRUE  49
+## 20    b    a 36    b  TRUE  81</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">#### Calling impute function
 <span class="co">#Missing value replaced with method = mode</span>
-tidyplusR<span class="op">::</span><span class="kw">impute</span>(dat,<span class="dt">method =</span> <span class="st">&quot;mode&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()  ## method can be replaced by median and mean as well</code></pre></div>
-<pre><code>##   x y     w z     b     a
-## 1 b b 35.48 a FALSE 24.00
-## 2 b b 31.00 a  TRUE 57.00
-## 3 c a 35.48 c  TRUE 23.00
-## 4 a a 35.00 c  TRUE 58.72
-## 5 b a 35.48 c  TRUE 58.72
-## 6 b c 42.00 b FALSE 61.00</code></pre>
+tidyplusR<span class="op">::</span><span class="kw">impute</span>(dat,<span class="dt">method =</span> <span class="st">&quot;mode&quot;</span>)   ## method can be replaced by median and mean as well</code></pre></div>
+<pre><code>##    x y     w z     b      a
+## 1  c b 18.09 c FALSE 100.00
+## 2  a b 47.00 b  TRUE  50.00
+## 3  a a 18.09 b  TRUE  50.00
+## 4  b b 40.00 c  TRUE  41.28
+## 5  b c 18.09 b  TRUE  41.28
+## 6  b c 46.00 c  TRUE  63.00
+## 7  b a 22.00 a  TRUE  97.00
+## 8  b a 12.00 c  TRUE  41.00
+## 9  a c  4.00 c  TRUE  41.28
+## 10 b a 13.00 a  TRUE  21.00
+## 11 a b 20.00 c  TRUE  27.00
+## 12 c a 22.00 b  TRUE  31.00
+## 13 a a 29.00 b  TRUE  38.00
+## 14 b a  0.00 c FALSE  16.00
+## 15 b c 19.00 c  TRUE  41.00
+## 16 a a 17.00 b FALSE   1.00
+## 17 c a 20.00 b FALSE  56.00
+## 18 b c  9.00 a  TRUE  26.00
+## 19 c a 39.00 c  TRUE  49.00
+## 20 b a 36.00 b  TRUE  81.00</code></pre>
 </div>
 <div id="markdown-table" class="section level4">
 <h4>Markdown table</h4>

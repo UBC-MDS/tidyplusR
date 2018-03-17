@@ -1,7 +1,7 @@
 TidyplusR
 ================
 Xinbin Huang, Akshi Chaudhary, Tian Qian
-2018-03-16
+2018-03-17
 
 Introduction
 ============
@@ -68,13 +68,13 @@ The section has two functions, typemix and cleanmix.
 
 ``` r
 library(tidyplusR)
-library(dplyr)
+
 
 dat<-data.frame(x1=c(1,2,3,"1.2.3"),
                 x2=c("test","test",1,TRUE),
                 x3=c(TRUE,TRUE,FALSE,FALSE))
 #Input data with mixed datatypes
-dat %>% head()
+dat 
 ```
 
     ##      x1   x2    x3
@@ -116,30 +116,58 @@ dat[c(4,5,9),5] <- NA
 dat[,4] <- factor(dat[,4] )
 dat[c(4,5,9),6] <- NA
 #Input data with missing values
-dat %>% head()
+dat 
 ```
 
-    ##      x    y  w    z     b  a
-    ## 1    c    b NA    b FALSE  3
-    ## 2    a    b 42    c  TRUE 93
-    ## 3    a <NA> NA    b  TRUE 80
-    ## 4    b    b 37 <NA>    NA NA
-    ## 5 <NA>    c NA <NA>    NA NA
-    ## 6    c    a 33    c FALSE 71
+    ##       x    y  w    z     b  a
+    ## 1     b    b NA    a FALSE 13
+    ## 2     c    a 34    a FALSE 41
+    ## 3     c <NA> NA    a FALSE 56
+    ## 4     a    b 31 <NA>    NA NA
+    ## 5  <NA>    a NA <NA>    NA NA
+    ## 6     c    b  0    b FALSE 35
+    ## 7     c <NA> 42    c  TRUE 19
+    ## 8     b    a 24    b FALSE 48
+    ## 9     c    a 26 <NA>    NA NA
+    ## 10 <NA>    b 49    a FALSE 40
+    ## 11    b    b 20    c  TRUE 98
+    ## 12    a    a 15    b FALSE 42
+    ## 13    c    b 50    c  TRUE 87
+    ## 14    b    c 43    a  TRUE 27
+    ## 15 <NA>    b 29    b FALSE 12
+    ## 16    b    b 30    b FALSE 52
+    ## 17    a    c  7    c FALSE  5
+    ## 18    c    a  5    c  TRUE 39
+    ## 19    b    b  2    c  TRUE 88
+    ## 20    c    a 13    c FALSE 38
 
 ``` r
 #### Calling impute function
 #Missing value replaced with method = mode
-tidyplusR::impute(dat,method = "mode") %>% head()  ## method can be replaced by median and mean as well
+tidyplusR::impute(dat,method = "mode")   ## method can be replaced by median and mean as well
 ```
 
-    ##   x y     w z     b     a
-    ## 1 c b 35.13 b FALSE  3.00
-    ## 2 a b 42.00 c  TRUE 93.00
-    ## 3 a b 35.13 b  TRUE 80.00
-    ## 4 b b 37.00 b FALSE 80.19
-    ## 5 a c 35.13 b FALSE 80.19
-    ## 6 c a 33.00 c FALSE 71.00
+    ##    x y     w z     b     a
+    ## 1  b b 27.78 a FALSE 13.00
+    ## 2  c a 34.00 a FALSE 41.00
+    ## 3  c b 27.78 a FALSE 56.00
+    ## 4  a b 31.00 c FALSE 40.77
+    ## 5  c a 27.78 c FALSE 40.77
+    ## 6  c b  0.00 b FALSE 35.00
+    ## 7  c b 42.00 c  TRUE 19.00
+    ## 8  b a 24.00 b FALSE 48.00
+    ## 9  c a 26.00 c FALSE 40.77
+    ## 10 c b 49.00 a FALSE 40.00
+    ## 11 b b 20.00 c  TRUE 98.00
+    ## 12 a a 15.00 b FALSE 42.00
+    ## 13 c b 50.00 c  TRUE 87.00
+    ## 14 b c 43.00 a  TRUE 27.00
+    ## 15 c b 29.00 b FALSE 12.00
+    ## 16 b b 30.00 b FALSE 52.00
+    ## 17 a c  7.00 c FALSE  5.00
+    ## 18 c a  5.00 c  TRUE 39.00
+    ## 19 b b  2.00 c  TRUE 88.00
+    ## 20 c a 13.00 c FALSE 38.00
 
 #### Markdown table
 

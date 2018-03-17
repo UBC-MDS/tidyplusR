@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 TidyPlusR: a tool for data wrangling
-===================================
+====================================
 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
@@ -20,10 +20,9 @@ TidyPlusR: a tool for data wrangling
 Contributors:
 -------------
 
--   `Akshi Chaudhary` : \[@akshi8\](<https://github.com/akshi8>)
-
--   `Tina Qian` : \[@TinaQian2017\](<https://github.com/TinaQian2017>)
--   `Xinbin Huang`: \[@xinbinhuang\](<https://github.com/xinbinhuang>)
+-   `Akshi Chaudhary` : [akshi8](https://github.com/akshi8)
+-   `Tina Qian` : [TinaQian2017](https://github.com/TinaQian2017)
+-   `Xinbin Huang`: [xinbinhuang](https://github.com/xinbinhuang)
 
 Latest
 ------
@@ -35,7 +34,6 @@ About
 -----
 
 The `tidyplusR` package is an essential data cleaning package with features like missing value treatment, data manipulation and displaying data as markdown table for documents. The package adds a few additional functionality on the existing data wrangling packages in popular statistical software like R. The objective of this package is to provide a few specific functions to solve some of the pressing issues in data cleaning.
-
 
 Installation
 ------------
@@ -50,31 +48,30 @@ devtools::install_github("UBC-MDS/tidyplusR")
 Functions included:
 -------------------
 
-#### Three main parts including different functions in `tidyplusR`
+> Three main parts including different functions in `tidyplusR`
 
-- `Data Manipulation` : Datatype cleansing
-  - `typemix`
-    * The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.
-  - `cleanmix`
-    * The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. 
-    * Here, the input will be the output by `typemix` function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original type but with specified data type in certain columns deleted.
+-   `Data Manipulation` : Datatype cleansing
+-   `typemix`
+    -   The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.
+-   `cleanmix`
+    -   The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns.
+    -   Here, the input will be the output by `typemix` function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original type but with specified data type in certain columns deleted.
+-   `Missing Value Treatment` : Basic Imputation using `impute`
 
-- `Missing Value Treatment` : Basic Imputation using `impute`
+    -   Imputation: replace missing values in a column of a dataframe, or multiple columns of dataframe based on the `method` of imputation
 
-    * Imputation: replace missing values in a column of a dataframe, or multiple columns of dataframe based on the `method` of imputation
+    -   `(Method = 'Mean')` replace using mean
+    -   `(Method = 'Median')` replace using median
+    -   `(Method = 'Mode')` replace using mode
 
-      - `(Method = 'Mean')` replace using mean
-      - `(Method = 'Median')` replace using median
-      - `(Method = 'Mode')` replace using mode
-      
-- `Markdown Table`:
+-   `Markdown Table`:
 
-  - `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, and size of the table can be input by users.
-    - Input: the size of table (number of rows and number of columns)
-    - Output:  a character vector of the source code.
-  - `md_data()`: This function converts a dataframe or matrix into a markdown table format.
-    - Input: a matrix or dataframe
-    - Output: a character vector of the source code.
+-   `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, and size of the table can be input by users.
+    -   Input: the size of table (number of rows and number of columns)
+    -   Output: a character vector of the source code.
+-   `md_data()`: This function converts a dataframe or matrix into a markdown table format.
+    -   Input: a matrix or dataframe
+    -   Output: a character vector of the source code.
 
 Example
 -------
@@ -91,42 +88,60 @@ The section has two functions, typemix and cleanmix.
 
 ``` r
 library(tidyplusR)
-library(dplyr)
 dat<-data.frame(x1=c(1,2,3,"1.2.3"),
                 x2=c("test","test",1,TRUE),
                 x3=c(TRUE,TRUE,FALSE,FALSE))
 
 typemix(dat) #
-#> [[1]]
-#>      x1   x2    x3
-#> 1     1 test  TRUE
-#> 2     2 test  TRUE
-#> 3     3    1 FALSE
-#> 4 1.2.3 TRUE FALSE
-#> 
-#> [[2]]
-#>          x1        x2 x3
-#> 1    number character NA
-#> 2    number character NA
-#> 3    number    number NA
-#> 4 character   logical NA
-#> 
-#> [[3]]
-#>   Column_ID number character logical
-#> 1         1      3         1       0
-#> 2         2      1         2       1
-
-cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
-#>     x1   x2    x3
-#> 1    1 test  TRUE
-#> 2    2 test  TRUE
-#> 3    3 <NA> FALSE
-#> 4 <NA> <NA> FALSE
 ```
+
+    ## [[1]]
+    ##      x1   x2    x3
+    ## 1     1 test  TRUE
+    ## 2     2 test  TRUE
+    ## 3     3    1 FALSE
+    ## 4 1.2.3 TRUE FALSE
+    ## 
+    ## [[2]]
+    ##          x1        x2 x3
+    ## 1    number character NA
+    ## 2    number character NA
+    ## 3    number    number NA
+    ## 4 character   logical NA
+    ## 
+    ## [[3]]
+    ##   Column_ID number character logical
+    ## 1         1      3         1       0
+    ## 2         2      1         2       1
+
+``` r
+cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
+```
+
+    ##     x1   x2    x3
+    ## 1    1 test  TRUE
+    ## 2    2 test  TRUE
+    ## 3    3 <NA> FALSE
+    ## 4 <NA> <NA> FALSE
 
 #### Missing Value imputation
 
 -   This function requires a `dataframe` as an input for missing value treatment using mean/median/mode
+
+``` r
+library(tidyverse)
+```
+
+    ## -- Attaching packages ----------------------------------------------------------------------------------------------------------------------- tidyverse 1.2.1 --
+
+    ## v ggplot2 2.2.1     v purrr   0.2.4
+    ## v tibble  1.4.2     v dplyr   0.7.4
+    ## v tidyr   0.8.0     v stringr 1.2.0
+    ## v readr   1.1.1     v forcats 0.2.0
+
+    ## -- Conflicts -------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
 
 ``` r
 # Dummy dataframe
@@ -150,15 +165,15 @@ dat[c(4,5,9),6] <- NA
 # method can be replaced by median and mean as well
 
 impute(dat,method = "mode") %>% head()
-
-#>   x y     w z     b     a
-#> 1 a b  7.26 b  TRUE 42.00
-#> 2 b a 13.00 c  TRUE 82.00
-#> 3 b b  7.26 a FALSE 10.00
-#> 4 c c 31.00 a FALSE 49.41
-#> 5 a a  7.26 a FALSE 49.41
-#> 6 c c 10.00 a  TRUE 54.00
 ```
+
+    ##   x y    w z     b     a
+    ## 1 b a 16.6 a FALSE 29.00
+    ## 2 a a 46.0 c  TRUE  6.00
+    ## 3 b a 16.6 c FALSE 10.00
+    ## 4 c c 22.0 a  TRUE 11.81
+    ## 5 c a 16.6 a  TRUE 11.81
+    ## 6 a a 12.0 a FALSE 14.00
 
 #### Markdown table
 
@@ -167,86 +182,110 @@ impute(dat,method = "mode") %>% head()
 ``` r
 ## default: ncol = 2 and nrow = 2, alignment = "l"
 md_new()
-#> 
-#> |    |    |
-#> |:---|:---|
-#> |    |    |
-#> |    |    |
+```
 
+    ## 
+    ## |    |    |
+    ## |:---|:---|
+    ## |    |    |
+    ## |    |    |
+
+``` r
 ## 3 by 3 table
 md_new(nrow = 3, ncol = 3)
-#> 
-#> |    |    |    |
-#> |:---|:---|:---|
-#> |    |    |    |
-#> |    |    |    |
-#> |    |    |    |
+```
 
+    ## 
+    ## |    |    |    |
+    ## |:---|:---|:---|
+    ## |    |    |    |
+    ## |    |    |    |
+    ## |    |    |    |
+
+``` r
 ## different alignments:
 md_new(nrow = 1, align = "c")
-#> 
-#> |    |    |
-#> |:--:|:--:|
-#> |    |    |
-md_new(nrow = 1, align = "r")
-#> 
-#> |    |    |
-#> |---:|---:|
-#> |    |    |
+```
 
+    ## 
+    ## |    |    |
+    ## |:--:|:--:|
+    ## |    |    |
+
+``` r
+md_new(nrow = 1, align = "r")
+```
+
+    ## 
+    ## |    |    |
+    ## |---:|---:|
+    ## |    |    |
+
+``` r
 ## providing header
 h <- c("foo", "boo")
 md_new(header = h)
-#> 
-#> | foo| boo|
-#> |:---|:---|
-#> |    |    |
-#> |    |    |
 ```
+
+    ## 
+    ## | foo| boo|
+    ## |:---|:---|
+    ## |    |    |
+    ## |    |    |
 
 -   `md_data()` can create an markdown table given input as matrix of data frame.
 
 ``` r
 md_data(mtcars, row.index = 1:3, col.index = 1:4)
-#> 
-#> |    |mpg|cyl|disp|hp|
-#> |:---|---:|---:|---:|---:|
-#> |Mazda RX4|21.0|6|160|110|
-#> |Mazda RX4 Wag|21.0|6|160|110|
-#> |Datsun 710|22.8|4|108|93|
+```
 
+    ## 
+    ## |    |mpg|cyl|disp|hp|
+    ## |:---|---:|---:|---:|---:|
+    ## |Mazda RX4|21.0|6|160|110|
+    ## |Mazda RX4 Wag|21.0|6|160|110|
+    ## |Datsun 710|22.8|4|108|93|
+
+``` r
 ## alignment to right
 md_data(mtcars, row.index = 1:3, col.index = 1:4, align = "r")
-#> 
-#> |    |mpg|cyl|disp|hp|
-#> |:---|---:|---:|---:|---:|
-#> |Mazda RX4|21.0|6|160|110|
-#> |Mazda RX4 Wag|21.0|6|160|110|
-#> |Datsun 710|22.8|4|108|93|
+```
 
+    ## 
+    ## |    |mpg|cyl|disp|hp|
+    ## |:---|---:|---:|---:|---:|
+    ## |Mazda RX4|21.0|6|160|110|
+    ## |Mazda RX4 Wag|21.0|6|160|110|
+    ## |Datsun 710|22.8|4|108|93|
+
+``` r
 ## provide header
 md_data(mtcars, row.index = 1:3, col.index = 1:4, header = c("a","b","c","d"))
-#> 
-#> |    |a|b|c|d|
-#> |:---|---:|---:|---:|---:|
-#> |Mazda RX4|21.0|6|160|110|
-#> |Mazda RX4 Wag|21.0|6|160|110|
-#> |Datsun 710|22.8|4|108|93|
+```
 
+    ## 
+    ## |    |a|b|c|d|
+    ## |:---|---:|---:|---:|---:|
+    ## |Mazda RX4|21.0|6|160|110|
+    ## |Mazda RX4 Wag|21.0|6|160|110|
+    ## |Datsun 710|22.8|4|108|93|
+
+``` r
 ## not include row names
 md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
-#> 
-#> |mpg|cyl|disp|hp|
-#> |---:|---:|---:|---:|
-#> |21|6|160|110|
-#> |21|6|160|110|
-#> |22.8|4|108|93|
 ```
+
+    ## 
+    ## |mpg|cyl|disp|hp|
+    ## |---:|---:|---:|---:|
+    ## |21|6|160|110|
+    ## |21|6|160|110|
+    ## |22.8|4|108|93|
 
 Used Scenario
 -------------
 
-Using Data Manipulation functionality
+> Using Data Manipulation functionality
 
 -   Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `Missing Value Treatment` to deal with missing data by EM algorithm. The `emphasizeon` function can be used to highlight the factors that he is interested in. After the wrangling of data, one can use function `Markdown Table` to output the data frame in a markdown format.
 
@@ -257,7 +296,7 @@ Existing features in R and Python ecosystem similar to `tidyplus`
 -   [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) and [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html) these R libraries have very powerful data wrangling tools but with `tidyplus` user can explicitly perform string processing/ datatype conversion without affecting the overall column type (which is convenient when you have really messed up data with mix of strings and numbers)
 
 -   Missing Value treatment
--   R doesn't have imputation methods which use `EM algorithm` for missing value treatment, which in fact is very efficient and accurate [MICE](https://cran.r-project.org/web/packages/mice/index.html) package in R do provide limited imputation using mean, mode, etc.
+-   R doesn't have imputation methods which use `Mode` for missing value treatment, which can be useful for categorical and numeric variables [MICE](https://cran.r-project.org/web/packages/mice/index.html) package in R do provide limited imputation using mean, median, etc.
 -   Markdown table in R
 -   R has library [`Kable`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) which can output a dataset in the form of a markdown table but with `tidyplus` user will have more freedom with data types and formatting.
 

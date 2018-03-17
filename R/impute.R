@@ -1,3 +1,4 @@
+
 #' Impute missing values with the mean/median/mode or \code{impute}
 #' 
 #' When the mean/median/mode method is used: character vectors and factors are imputed with the mode. 
@@ -57,11 +58,11 @@ impute <- function (data, method="methods"){
     
   } else if (method=="mode") {
     
-    
-    mode_est <- function(x=0) {
+    a <- 0
+    mode_est <- function(a) {
       
-      tab <- table(x)
-      l <- sum(is.na(x))
+      tab <- table(a)
+      l <- sum(is.na(a))
       sample(names(tab)[tab==max(tab)], l, TRUE) ## this function find the most frequent occuring values for `mode`
       
     }
@@ -71,7 +72,7 @@ impute <- function (data, method="methods"){
         data[i][is.na(data[i])] <- mode_est(data[i]) ## this function only replaces missing mode for non-numeric cols
       } else {
         
-        d<- stats::density(data[,i],na.rm = TRUE,from=min(x), to=max(x))
+        d<- stats::density(data[,i],na.rm = TRUE)
         md <- d$x[which.max(d$y)]
         data[i][is.na(data[i])] <- md ## this step only replaces missing with mode for numeric cols
         
@@ -91,12 +92,11 @@ impute <- function (data, method="methods"){
     
   }
   
-
+  
   
   imputed_data <- data
   imputed_data
   
 }
-
 
 

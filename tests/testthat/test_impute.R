@@ -1,5 +1,5 @@
-library(testthat)
-testthat::context("impute.R")
+#library(testthat)
+#testthat::context("impute.R")
 
 set.seed(0)
 

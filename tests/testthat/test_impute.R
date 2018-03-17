@@ -1,5 +1,5 @@
 library(testthat)
-context("Impute missing values in a dataframe")
+context("Impute.R")
 
 set.seed(0)
 

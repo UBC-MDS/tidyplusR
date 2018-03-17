@@ -119,13 +119,52 @@ cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
 
 #### Missing Value imputation
 
--   This function requires a `dataframe` as an input for missing value treatmet using mean/median/mode \`\`\`r \#\#\# Dummy dataframe dat &lt;- data.frame(x=sample(letters\[1:3\],20,TRUE), y=sample(letters\[1:3\],20,TRUE), w=rnorm(20), z=sample(letters\[1:3\],20,TRUE), b = as.logical(sample(0:1,20,TRUE)), a=rnorm(20), stringsAsFactors=FALSE)
+-   This function requires a `dataframe` as an input for missing value treatmet using mean/median/mode
 
-dat\[c(5,10,15),1\] &lt;- NA dat\[c(3,7),2\] &lt;- NA dat\[c(1,3,5),3\] &lt;- NA dat\[c(4,5,9),4\] &lt;- NA dat\[c(4,5,9),5\] &lt;- NA dat\[,4\] &lt;- factor(dat\[,4\] ) dat\[c(4,5,9),6\] &lt;- NA df &lt;- c(1,2,3,NA)
+``` r
+# Dummy dataframe
+dat <- data.frame(x=sample(letters[1:3],20,TRUE),
+                                     y=sample(letters[1:3],20,TRUE),
+                                     w=rnorm(20),
+                                     z=sample(letters[1:3],20,TRUE),
+                                     b = as.logical(sample(0:1,20,TRUE)),
+                                     a=rnorm(20),
+                                     stringsAsFactors=FALSE)
 
-#### Calling impute function
+dat[c(5,10,15),1] <- NA
+dat[c(3,7),2] <- NA
+dat[c(1,3,5),3] <- NA
+dat[c(4,5,9),4] <- NA
+dat[c(4,5,9),5] <- NA
+dat[,4] <- factor(dat[,4] )
+dat[c(4,5,9),6] <- NA
+df <- c(1,2,3,NA)
 
-impute(dat,method = "mode") \#\# method can be replaced by median and mean as well \`\`\`
+# Calling impute function
+# method can be replaced by median and mean as well
+impute(dat,method = "mode")  
+#>    x y     w z     b     a
+#> 1  a b -0.39 c  TRUE -0.81
+#> 2  c b  0.83 a FALSE -0.48
+#> 3  a c -0.39 a FALSE  1.29
+#> 4  b a  0.67 a FALSE  0.27
+#> 5  b a -0.39 a FALSE  0.27
+#> 6  b a -1.06 a FALSE  0.43
+#> 7  b b -0.15 a FALSE -1.40
+#> 8  c c -0.76 a FALSE -0.62
+#> 9  c c -0.13 a FALSE  0.27
+#> 10 b b -0.54 a  TRUE -1.21
+#> 11 b b  0.15 b FALSE  0.49
+#> 12 a a  0.86 b FALSE  0.29
+#> 13 b a  1.84 c FALSE -0.17
+#> 14 b b -1.22 c  TRUE -1.77
+#> 15 b c  0.68 a  TRUE  0.22
+#> 16 a b -0.27 b  TRUE  1.14
+#> 17 c c -0.51 a FALSE  0.46
+#> 18 a a  0.90 c  TRUE -0.84
+#> 19 b c  0.69 b  TRUE -2.00
+#> 20 b c -0.49 a  TRUE  1.31
+```
 
 #### Markdown table
 

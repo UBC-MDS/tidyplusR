@@ -23,10 +23,10 @@ Numeric and integer vectors are imputed with the mean/median.For imputing missin
 \examples{
 
 #Dummy dataset
-dat <- data.frame(x=sample(letters[1:3],20,TRUE),
+dat <- data.frame(x=sample(letters[1:3],20,TRUE), 
                   y=sample(letters[1:3],20,TRUE),
                   w=rnorm(20),
-                  z=sample(letters[1:3],20,TRUE),
+                  z=sample(letters[1:3],20,TRUE), 
                   b = as.logical(sample(0:1,20,TRUE)),
                   stringsAsFactors=FALSE)
 
@@ -38,5 +38,4 @@ dat[c(4,5,9),5] <- NA
 dat[,4] <- factor(dat[,4] )
 #Usage
 impute(dat,method = "mean")
-
 }

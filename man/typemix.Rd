@@ -21,6 +21,14 @@ The function helps to find the columns in a data frame that contains different t
  Note, the self-defined type "number" here is an assemble of types including numeric (real and decimal), integer and complex.
 }
 \examples{
+# sample data frame
+sample_df<-data.frame(x1=c(1,2,3,"1.2.3"),
+                   x2=c("test","test",TRUE,100),
+                   x3=c(1,FALSE,"FALSE "," true"),
+                   x4=c(1,2,3,4),
+                   x5=c("t","t","t","t"),
+                   x6=c(TRUE,TRUE,FALSE,FALSE))
+
 typemix(sample_df)
 
 }

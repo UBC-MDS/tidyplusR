@@ -1,13 +1,19 @@
 #' Impute missing values with the mean/median/mode or \code{impute}
 #' 
 #' When the mean/median/mode method is used: character vectors and factors are imputed with the mode. 
+
+#' @import stats
+
 #
 #' 
+
 #' @param data A data frame with factor or numeric variables. When columns are of type "character", method=="mode" . 
 #' @param method Either "mean/median/mode". Only works if object = NULL, that is missing , NA
 #' @details Numeric and integer vectors are imputed with the mean/median.For imputing missing values the function is \code{impute}. 
 #' @return An imputed dataframe {data} with method selected by user
-#' @export
+
+
+
 #' @examples
 #'
 #' #Dummy dataset
@@ -28,6 +34,8 @@
 #'impute(dat,method = "mean")
 
 
+#' @export
+#' 
 
 impute <- function (data, method="methods"){
   
@@ -42,7 +50,7 @@ impute <- function (data, method="methods"){
   if (method=="median") {
     for(i in 1:ncol(data)){
       if(is.numeric(data[,i]) )  {
-        data[is.na(data[,i]), i] <- median(data[,i], na.rm = TRUE) ## only replace numeric columns with median
+        data[is.na(data[,i]), i] <- stats::median(data[,i], na.rm = TRUE) ## only replace numeric columns with median
       }
     }
     
@@ -50,7 +58,7 @@ impute <- function (data, method="methods"){
   } else if (method=="mode") {
     
     
-    mode_est <- function(x) {
+    mode_est <- function(x=0) {
       
       tab <- table(x)
       l <- sum(is.na(x))
@@ -63,7 +71,7 @@ impute <- function (data, method="methods"){
         data[i][is.na(data[i])] <- mode_est(data[i]) ## this function only replaces missing mode for non-numeric cols
       } else {
         
-        d<- density(data[,i],na.rm = TRUE,from=min(x), to=max(x))
+        d<- stats::density(data[,i],na.rm = TRUE,from=min(x), to=max(x))
         md <- d$x[which.max(d$y)]
         data[i][is.na(data[i])] <- md ## this step only replaces missing with mode for numeric cols
         

@@ -1,4 +1,3 @@
-library(testthat)
 context("Impute missing values in a dataframe")
 
 set.seed(0)

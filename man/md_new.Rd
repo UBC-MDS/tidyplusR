@@ -4,14 +4,14 @@
 \alias{md_new}
 \title{Create Markdown table skeleton}
 \usage{
-md_new(ncol = 2, nrow = 2, align = NULL, header = NA)
+md_new(nrow = 2, ncol = 2, align = NULL, header = NA)
 }
 \arguments{
-\item{ncol, nrow}{number of columns and rows for the table}
+\item{nrow, ncol}{number of columns and rows for the table}
 
-\item{align}{Column alignment: a character vector consisting of 'l' (left), 'c' (center) and/or 'r' (right). If align = 'l', all columns are left aligned. e.t.c.}
+\item{align}{Column alignment: a single character of 'l' (left), 'c' (center) and/or 'r' (right). If align = 'l', all columns are left aligned. e.t.c.}
 
-\item{header}{A character vector of length = ncol to be used for the header of the table. Default NULL.}
+\item{header}{A character vector of length = ncol to be used for the header of the table. Default NA.}
 }
 \value{
 A character vector of the table source code.
@@ -19,4 +19,14 @@ A character vector of the table source code.
 \description{
 Creates a bare bone for generating a markdown table.
 Alignments and size of the table can be input by users.
+}
+\details{
+The output markdown source code is stored as character vector in R. It can be further copied and pasted for other usage.
+}
+\examples{
+md_new(2,3, align = "c")
+md_new(2,3, header = c("a", "b", "c"))
+}
+\seealso{
+Other R packages such as `huxtable`, `xtable`, `kableExtra`, and `tables` for HTML and LaTeX tables, and ascii and pander for different flavors of markdown output and some advanced features and table styles.
 }

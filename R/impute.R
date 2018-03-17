@@ -1,11 +1,18 @@
 #' Impute missing values with the mean/median/mode or \code{impute}
 #' 
 #' When the mean/median/mode method is used: character vectors and factors are imputed with the mode. 
+
 #' @import stats
+
+#
+#' 
+
 #' @param data A data frame with factor or numeric variables. When columns are of type "character", method=="mode" . 
 #' @param method Either "mean/median/mode". Only works if object = NULL, that is missing , NA
 #' @details Numeric and integer vectors are imputed with the mean/median.For imputing missing values the function is \code{impute}. 
 #' @return An imputed dataframe {data} with method selected by user
+
+
 
 #' @examples
 #'
@@ -26,8 +33,10 @@
 #'#Usage
 #'impute(dat,method = "mean")
 
+
 #' @export
 #' 
+
 impute <- function (data, method="methods"){
   
   

@@ -3,7 +3,7 @@
 <img src="tidypluslogo.png" align="right" border="none" width="250" height="250"/>TidyPlusR: a tool for data wrangling
 ======================================================================================================================
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues) [![Build Status](https://travis-ci.org/UBC-MDS/tidyplusR.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusR)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues) [![Build Status](https://travis-ci.org/UBC-MDS/tidyplusR.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusR) [![codecov](https://codecov.io/gh/UBC-MDS/tidyplusR/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/tidyplusR)
 
 Contributors:
 -------------
@@ -36,30 +36,21 @@ devtools::install_github("UBC-MDS/tidyplusR")
 Functions included:
 -------------------
 
-> Three main parts include different functions in `tidyplusR`
+Three main parts include different functions in `tidyplusR`
 
--   `Data Manipulation` : Datatype cleansing
--   `typemix`
-    -   The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.
--   `cleanmix`
-    -   The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns.
-    -   Here, the input will be the output by `typemix` function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original type but with specified data type in certain columns deleted.
--   `Missing Value Treatment` : Basic Imputation using `impute`
-
+-   **Data Manipulation** : Datatype cleansing
+    -   `typemix` \* The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.
+    -   `cleanmix` \* The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. \* Here, the input will be the output by `typemix` function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original type but with specified data type in certain columns deleted.
+-   **Missing Value Treatment** : Basic Imputation using `impute`
     -   Imputation: replace missing values in a column of a dataframe, or multiple columns of dataframe based on the `method` of imputation
 
     -   `(Method = 'Mean')` replace using mean
     -   `(Method = 'Median')` replace using median
     -   `(Method = 'Mode')` replace using mode
 
--   `Markdown Table`:
-
--   `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, and size of the table can be input by users.
-    -   Input: the size of table (number of rows and number of columns)
-    -   Output: a character vector of the source code.
--   `md_data()`: This function converts a dataframe or matrix into a markdown table format.
-    -   Input: a matrix or dataframe
-    -   Output: a character vector of the source code.
+-   **Markdown Table**:
+    -   `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, and size of the table can be input by users. - Input: the size of table (number of rows and number of columns) - Output: a character vector of the source code.
+    -   `md_data()`: This function converts a dataframe or matrix into a markdown table format. - Input: a matrix or dataframe - Output: a character vector of the source code.
 
 Example
 -------
@@ -156,12 +147,12 @@ impute(dat,method = "mode") %>% head()
 ```
 
     ##   x y     w z     b     a
-    ## 1 b a 10.78 c  TRUE 94.00
-    ## 2 c b  4.00 c FALSE 79.00
-    ## 3 c a 10.78 a FALSE 21.00
-    ## 4 b a 36.00 a  TRUE 85.43
-    ## 5 c c 10.78 a  TRUE 85.43
-    ## 6 b a 26.00 b  TRUE 18.00
+    ## 1 b c 24.93 b  TRUE 78.00
+    ## 2 a a  3.00 b FALSE 56.00
+    ## 3 c c 24.93 b  TRUE 98.00
+    ## 4 a c  0.00 b  TRUE 78.34
+    ## 5 c b 24.93 b  TRUE 78.34
+    ## 6 a a 15.00 b FALSE 69.00
 
 #### Markdown table
 
@@ -273,8 +264,6 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
 Used Scenario
 -------------
 
-> Using Data Manipulation functionality
-
 -   Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `impute()` to deal with missing data with mean/median/mode. The resulting data frame can be output to markdown syntax with `md_data()`. Your can also use `md_new()` to create a empty markdown table.
 
 Existing features in R and Python ecosystem similar to `tidyplus`
@@ -287,11 +276,6 @@ Existing features in R and Python ecosystem similar to `tidyplus`
 -   R doesn't have imputation methods which use `Mode` for missing value treatment, which can be useful for categorical and numeric variables [MICE](https://cran.r-project.org/web/packages/mice/index.html) package in R do provide limited imputation using mean, median, etc.
 -   Markdown table in R
 -   R has library [`Kable`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) which can output a dataset in the form of a markdown table but with `tidyplus` user will have more freedom with data types and formatting.
-
-Ideas subject to change
------------------------
-
--   As a part of the initial proposal, the above ideas can be implemented. However, some functionality are subject to change based on the project timeline or technical complexity
 
 License
 -------

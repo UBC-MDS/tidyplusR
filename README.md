@@ -82,14 +82,14 @@ typemix(dat) #
     ## 2     2 test  TRUE
     ## 3     3    1 FALSE
     ## 4 1.2.3 TRUE FALSE
-    ##
+    ## 
     ## [[2]]
     ##          x1        x2 x3
     ## 1    number character NA
     ## 2    number character NA
     ## 3    number    number NA
     ## 4 character   logical NA
-    ##
+    ## 
     ## [[3]]
     ##   Column_ID number character logical
     ## 1         1      3         1       0
@@ -113,23 +113,23 @@ cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
 library(tidyverse)
 ```
 
-    ## -- Attaching packages ---------------------------------------------------------------------- tidyverse 1.2.1 --
+    ## ── Attaching packages ────────
 
-    ## v ggplot2 2.2.1     v purrr   0.2.4
-    ## v tibble  1.4.2     v dplyr   0.7.4
-    ## v tidyr   0.8.0     v stringr 1.2.0
-    ## v readr   1.1.1     v forcats 0.2.0
+    ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
+    ## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
+    ## ✔ tidyr   0.8.0     ✔ stringr 1.3.0
+    ## ✔ readr   1.1.1     ✔ forcats 0.3.0
 
-    ## -- Conflicts ------------------------------------------------------------------------- tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
+    ## ── Conflicts ─────────────────
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
 
 ``` r
 # Dummy dataframe
-dat <- data.frame(x=sample(letters[1:3],20,TRUE),
+dat <- data.frame(x=sample(letters[1:3],20,TRUE), 
                   y=sample(letters[1:3],20,TRUE),
                   w=as.numeric(sample(0:50,20,TRUE)),
-                  z=sample(letters[1:3],20,TRUE),
+                  z=sample(letters[1:3],20,TRUE), 
                   b = as.logical(sample(0:1,20,TRUE)),
                   a=sample(0:100,20,TRUE),
                   stringsAsFactors=FALSE)
@@ -148,13 +148,13 @@ dat[c(4,5,9),6] <- NA
 impute(dat,method = "mode") %>% head()
 ```
 
-    ##   x y     w z     b     a
-    ## 1 a c 24.22 a  TRUE 75.00
-    ## 2 c a 14.00 c FALSE 72.00
-    ## 3 a a 24.22 a  TRUE 22.00
-    ## 4 a a 43.00 c FALSE 81.02
-    ## 5 b c 24.22 c FALSE 81.02
-    ## 6 b c  6.00 b FALSE 21.00
+    ##   x y    w z     b     a
+    ## 1 a b 34.6 a  TRUE 40.00
+    ## 2 b c 33.0 c FALSE  1.00
+    ## 3 c c 34.6 a  TRUE 38.00
+    ## 4 c c 15.0 a FALSE 23.53
+    ## 5 b b 34.6 a FALSE 23.53
+    ## 6 c c 22.0 b FALSE 37.00
 
 #### Markdown table
 
@@ -165,7 +165,7 @@ impute(dat,method = "mode") %>% head()
 md_new()
 ```
 
-    ##
+    ## 
     ## |    |    |
     ## |:---|:---|
     ## |    |    |
@@ -176,7 +176,7 @@ md_new()
 md_new(nrow = 3, ncol = 3)
 ```
 
-    ##
+    ## 
     ## |    |    |    |
     ## |:---|:---|:---|
     ## |    |    |    |
@@ -188,7 +188,7 @@ md_new(nrow = 3, ncol = 3)
 md_new(nrow = 1, align = "c")
 ```
 
-    ##
+    ## 
     ## |    |    |
     ## |:--:|:--:|
     ## |    |    |
@@ -197,7 +197,7 @@ md_new(nrow = 1, align = "c")
 md_new(nrow = 1, align = "r")
 ```
 
-    ##
+    ## 
     ## |    |    |
     ## |---:|---:|
     ## |    |    |
@@ -208,7 +208,7 @@ h <- c("foo", "boo")
 md_new(header = h)
 ```
 
-    ##
+    ## 
     ## | foo| boo|
     ## |:---|:---|
     ## |    |    |
@@ -220,7 +220,7 @@ md_new(header = h)
 md_data(mtcars, row.index = 1:3, col.index = 1:4)
 ```
 
-    ##
+    ## 
     ## |    |mpg|cyl|disp|hp|
     ## |:---|---:|---:|---:|---:|
     ## |Mazda RX4|21.0|6|160|110|
@@ -232,7 +232,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4)
 md_data(mtcars, row.index = 1:3, col.index = 1:4, align = "r")
 ```
 
-    ##
+    ## 
     ## |    |mpg|cyl|disp|hp|
     ## |:---|---:|---:|---:|---:|
     ## |Mazda RX4|21.0|6|160|110|
@@ -244,7 +244,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, align = "r")
 md_data(mtcars, row.index = 1:3, col.index = 1:4, header = c("a","b","c","d"))
 ```
 
-    ##
+    ## 
     ## |    |a|b|c|d|
     ## |:---|---:|---:|---:|---:|
     ## |Mazda RX4|21.0|6|160|110|
@@ -256,7 +256,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, header = c("a","b","c","d"))
 md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
 ```
 
-    ##
+    ## 
     ## |mpg|cyl|disp|hp|
     ## |---:|---:|---:|---:|
     ## |21|6|160|110|
@@ -266,7 +266,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
 User Scenario
 -------------
 
--   Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `impute()` to deal with missing data with mean/median/mode. The resulting data frame can be output to markdown syntax with `md_data()`. You can also use `md_new()` to create a empty markdown table.
+-   Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `impute()` to deal with missing data with mean/median/mode. The resulting data frame can be output to markdown syntax with `md_data()`. Your can also use `md_new()` to create a empty markdown table.
 
 Existing features in R and Python ecosystem similar to `tidyplus`
 -----------------------------------------------------------------
@@ -278,6 +278,11 @@ Existing features in R and Python ecosystem similar to `tidyplus`
 -   R doesn't have imputation methods which use `Mode` for missing value treatment, which can be useful for categorical and numeric variables [MICE](https://cran.r-project.org/web/packages/mice/index.html) package in R do provide limited imputation using mean, median, etc.
 -   Markdown table in R
 -   R has library [`Kable`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) which can output a dataset in the form of a markdown table but with `tidyplus` user will have more freedom with data types and formatting.
+
+Branch coverage
+---------------
+
+<img src="tests/full_coverage.png" width="980" />
 
 License
 -------

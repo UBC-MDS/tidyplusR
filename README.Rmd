@@ -167,6 +167,12 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
 -   Markdown table in R
 -   R has library [`Kable`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) which can output a dataset in the form of a markdown table but with `tidyplus` user will have more freedom with data types and formatting.
 
+## Branch coverage
+```{r,echo=FALSE}
+knitr::include_graphics("tests/full_coverage.png")
+```
+
+
 ## License
 
 [MIT](LICENSE.md)

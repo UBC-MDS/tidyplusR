@@ -31,7 +31,7 @@ The output markdown source code is stored as character vector in R. It can be fu
 z <- head(mtcars)
 md_data(z)
 md_data(z, 1:3,1:3)
-md_data(z, 1:3,1:3, row.names = F)
-md_data(z, 1:3,1:3, row.names = F, header = c("foo","bin","ha"))
+md_data(z, 1:3,1:3, row.names = FALSE)
+md_data(z, 1:3,1:3, row.names = FALSE, header = c("foo","bin","ha"))
 md_data(z, 1:3,1:3, header = c("foo","bin","ha"), align = "c")
 }

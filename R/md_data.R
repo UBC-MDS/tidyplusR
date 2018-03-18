@@ -16,8 +16,8 @@
 #' z <- head(mtcars)
 #' md_data(z)
 #' md_data(z, 1:3,1:3)
-#' md_data(z, 1:3,1:3, row.names = F)
-#' md_data(z, 1:3,1:3, row.names = F, header = c("foo","bin","ha"))
+#' md_data(z, 1:3,1:3, row.names = FALSE)
+#' md_data(z, 1:3,1:3, row.names = FALSE, header = c("foo","bin","ha"))
 #' md_data(z, 1:3,1:3, header = c("foo","bin","ha"), align = "c")
 md_data <- function(x, row.index = NA, col.index = NA, row.names = NA, header = NA, align = NULL){
 
@@ -35,11 +35,11 @@ md_data <- function(x, row.index = NA, col.index = NA, row.names = NA, header = 
       }
       # subsetting
       if (!identical(row.index,NA)){
-            x = x[row.index,]
+            x <-  x[row.index,]
       }
 
       if (!identical(col.index,NA)){
-            x = x[,col.index]
+            x <-  x[,col.index]
       }
 
       # Condition 2: row.names
@@ -69,60 +69,54 @@ md_data <- function(x, row.index = NA, col.index = NA, row.names = NA, header = 
       # creating table
 
 
-      len = 4
-      l = paste0(":", paste(rep("-", len-1),collapse = ""))
-      r = paste0(paste(rep("-", len-1),collapse = ""),":")
-      c = paste0(":",paste(rep("-", len-2),collapse = ""),":")
+      len <-  4
+      l <-  paste0(":", paste(rep("-", len-1),collapse = ""))
+      r <-  paste0(paste(rep("-", len-1),collapse = ""),":")
+      c <-  paste0(":",paste(rep("-", len-2),collapse = ""),":")
 
       if (identical(header, NA))
             header = colnames(x)
 
-      m = ncol(x)
-      isn = rep(is.numeric(as.matrix(x)), m)
+      m <-  ncol(x)
+      isn <-  rep(is.numeric(as.matrix(x)), m)
       if (is.null(align)){
-            align = ifelse(isn, "r", "l")
+            align <-  ifelse(isn, "r", "l")
       }
 
       if (is.na(row.names))
-            row.names = has_rownames(x)
+            row.names <-  has_rownames(x)
       if (!is.null(align))
-            align = rep(align, length.out = m)
+            align <-  rep(align, length.out = m)
       if (row.names) {
-            x = cbind(` ` = rownames(x), x)
+            x <-  cbind(` ` = rownames(x), x)
             if (!is.null(header))
-                  header = c("    ", header)
+                  header <-  c("    ", header)
             if (!is.null(align))
-                  align = c("l", align)
+                  align <-  c("l", align)
       }
 
-      n = nrow(x)
-      x = to_character(as.matrix(x))
+      n <-  nrow(x)
+      x <-  to_character(as.matrix(x))
       if (!is.matrix(x))
-            x = matrix(x, nrow = n)
-      x = trimws(x)
-      colnames(x) = header
-      res = apply(x, MARGIN = 1, function(z){paste0("|",paste(z, collapse = "|"),"|")})
-      header = paste0("|",paste(header, collapse = "|"),"|")
-      align = paste0("|",paste(unlist(mget(align)),collapse = "|"),"|")
-      res = c(header, align, res)
+            x <-  matrix(x, nrow = n)
+      x <-  trimws(x)
+      colnames(x) <-  header
+      res <-  apply(x, MARGIN = 1, function(z){paste0("|",paste(z, collapse = "|"),"|")})
+      header <-  paste0("|",paste(header, collapse = "|"),"|")
+      align <-  paste0("|",paste(unlist(mget(align)),collapse = "|"),"|")
+      res <-  c(header, align, res)
       return(structure(res, class = "md", names =NULL))
 
 }
 
 
 
-to_character = function(x) {
+to_character <-  function(x) {
       if (is.character(x)) return(x)
       x2 = as.character(x); dim(x2) = dim(x); dimnames(x2) = dimnames(x)
       x2
 }
 
-has_rownames = function(x) {
+has_rownames <-  function(x) {
       !is.null(rownames(x)) && !identical(rownames(x), as.character(seq_len(NROW(x))))
-}
-
-#' @export
-print.md = function(x, ...) {
-      cat('\n')
-      cat(x, sep = '\n')
 }

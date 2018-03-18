@@ -10,7 +10,7 @@
 #'
 #' @return A character vector of the table source code.
 #' @export
-#' @seealso  Other R packages such as `huxtable`, `xtable`, `kableExtra`, and `tables` for HTML and LaTeX tables, and ascii and pander for different flavors of markdown output and some advanced features and table styles.
+#' @seealso  Other R packages such as `kableExtra`, and `tables` for HTML and LaTeX tables, and ascii and pander for different flavors of markdown output and some advanced features and table styles.
 #' @examples
 #' md_new(2,3, align = "c")
 #' md_new(2,3, header = c("a", "b", "c"))
@@ -41,32 +41,32 @@ md_new <- function(nrow = 2, ncol = 2, align = NULL, header = NA){
       }
 
       # create table
-      n.pipe = ncol +1
+      n.pipe <-  ncol +1
 
-      len = max(nchar(trimws(header)), 4, na.rm = T)
-      space = paste(rep(" ", len), collapse = "")
-      row = paste(rep("|", n.pipe), collapse = space)
+      len <-  max(nchar(trimws(header)), 4, na.rm = TRUE)
+      space <-  paste(rep(" ", len), collapse = "")
+      row <-  paste(rep("|", n.pipe), collapse = space)
 
-      l = paste0(":", paste(rep("-", len-1),collapse = ""))
-      r = paste0(paste(rep("-", len-1),collapse = ""),":")
-      c = paste0(":",paste(rep("-", len-2),collapse = ""),":")
+      l <-  paste0(":", paste(rep("-", len-1),collapse = ""))
+      r <-  paste0(paste(rep("-", len-1),collapse = ""),":")
+      c <-  paste0(":",paste(rep("-", len-2),collapse = ""),":")
 
       if (identical(header, NA)){
             header <- row
       } else {
-            header = sapply(header, function(x)paste0(paste(rep(" ", len - nchar(x)),collapse = ""),x) )
-            header = paste(header, collapse = "|")
-            header = paste0("|",header,"|")
+            header <- sapply(header, function(x)paste0(paste(rep(" ", len - nchar(x)),collapse = ""),x) )
+            header <- paste(header, collapse = "|")
+            header <- paste0("|",header,"|")
       }
 
       if (is.null(align)){
-            align = l
-      } else align = get(align)
+            align <- l
+      } else align <- get(align)
 
-      align = paste(rep(align, ncol), collapse = "|")
-      align = paste0("|",align,"|")
+      align <- paste(rep(align, ncol), collapse = "|")
+      align <- paste0("|",align,"|")
 
-      res = c(header, align, rep(row, nrow))
+      res <- c(header, align, rep(row, nrow))
       return(structure(res, class = "md"))
 }
 

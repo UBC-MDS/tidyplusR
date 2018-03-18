@@ -9,9 +9,16 @@
 The tidyplus package is an essential data cleaning package with
 features like missing value treatment, data manipulation and displaying data as
 markdown table for documents. The package adds a few additional functionalities
-on the existing data wrangling packages in popular statistical softwares
+on the existing data wrangling packages in popular statistical software
 like R. The objective of this package is to provide a few specific functions
 to solve some of the pressing issues in data cleaning.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/UBC-MDS/tidyplusR}
+}
+
 }
 \author{
 \strong{Maintainer}: Xinbin Huang \email{xbhuang93@hotmail.com}

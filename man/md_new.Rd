@@ -28,5 +28,5 @@ md_new(2,3, align = "c")
 md_new(2,3, header = c("a", "b", "c"))
 }
 \seealso{
-Other R packages such as `huxtable`, `xtable`, `kableExtra`, and `tables` for HTML and LaTeX tables, and ascii and pander for different flavors of markdown output and some advanced features and table styles.
+Other R packages such as `kableExtra`, and `tables` for HTML and LaTeX tables, and ascii and pander for different flavors of markdown output and some advanced features and table styles.
 }

@@ -38,9 +38,11 @@ Functions included:
 
 Three main parts include different functions in `tidyplusR`
 
--   **Data Manipulation** : Datatype cleansing
-    -   `typemix` \* The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.
+-   **Data Type Cleansing** :
+    -   `typemix` \* The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames reporting details about the mixture of data types. The first data frame in the list is the same as the input data frame, the second one tells you the location and types of data in the columns where there is type mixture. The third data frame is a summary of the second data frame.
+
     -   `cleanmix` \* The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. \* Here, the input will be the output by `typemix` function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original type but with specified data type in certain columns deleted.
+
 -   **Missing Value Treatment** : Basic Imputation using `impute`
     -   Imputation: replace missing values in a column of a dataframe, or multiple columns of dataframe based on the `method` of imputation
 
@@ -57,7 +59,7 @@ Example
 
 This is a basic example which shows you how to solve a common problem:
 
-#### Datatype cleansing
+#### Data Type Cleansing
 
 The section has two functions, typemix and cleanmix.
 
@@ -111,16 +113,16 @@ cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ────────
+    ## -- Attaching packages ---------------------------------------------------------------------- tidyverse 1.2.1 --
 
-    ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
-    ## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
-    ## ✔ tidyr   0.8.0     ✔ stringr 1.3.0
-    ## ✔ readr   1.1.1     ✔ forcats 0.3.0
+    ## v ggplot2 2.2.1     v purrr   0.2.4
+    ## v tibble  1.4.2     v dplyr   0.7.4
+    ## v tidyr   0.8.0     v stringr 1.2.0
+    ## v readr   1.1.1     v forcats 0.2.0
 
-    ## ── Conflicts ─────────────────
-    ## ✖ dplyr::filter() masks stats::filter()
-    ## ✖ dplyr::lag()    masks stats::lag()
+    ## -- Conflicts ------------------------------------------------------------------------- tidyverse_conflicts() --
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
 
 ``` r
 # Dummy dataframe
@@ -147,12 +149,12 @@ impute(dat,method = "mode") %>% head()
 ```
 
     ##   x y     w z     b     a
-    ## 1 b c 24.93 b  TRUE 78.00
-    ## 2 a a  3.00 b FALSE 56.00
-    ## 3 c c 24.93 b  TRUE 98.00
-    ## 4 a c  0.00 b  TRUE 78.34
-    ## 5 c b 24.93 b  TRUE 78.34
-    ## 6 a a 15.00 b FALSE 69.00
+    ## 1 a c 24.22 a  TRUE 75.00
+    ## 2 c a 14.00 c FALSE 72.00
+    ## 3 a a 24.22 a  TRUE 22.00
+    ## 4 a a 43.00 c FALSE 81.02
+    ## 5 b c 24.22 c FALSE 81.02
+    ## 6 b c  6.00 b FALSE 21.00
 
 #### Markdown table
 
@@ -261,7 +263,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
     ## |21|6|160|110|
     ## |22.8|4|108|93|
 
-Used Scenario
+User Scenario
 -------------
 
 -   Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `impute()` to deal with missing data with mean/median/mode. The resulting data frame can be output to markdown syntax with `md_data()`. Your can also use `md_new()` to create a empty markdown table.
@@ -269,8 +271,8 @@ Used Scenario
 Existing features in R and Python ecosystem similar to `tidyplus`
 -----------------------------------------------------------------
 
--   Data Manipulation
--   [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) and [tidyverse](https://cran.r-project.org/web/packages/tidyverse/index.html) these R libraries have very powerful data wrangling tools but with `tidyplus` user can explicitly perform string processing/ datatype conversion without affecting the overall column type (which is convenient when you have really messed up data with mix of strings and numbers)
+-   Data Type Cleansing
+-   R does not have functions that can explicitly perform string processing/ data type conversion without affecting the overall column type.
 
 -   Missing Value treatment
 -   R doesn't have imputation methods which use `Mode` for missing value treatment, which can be useful for categorical and numeric variables [MICE](https://cran.r-project.org/web/packages/mice/index.html) package in R do provide limited imputation using mean, median, etc.

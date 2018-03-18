@@ -82,14 +82,14 @@ typemix(dat) #
     ## 2     2 test  TRUE
     ## 3     3    1 FALSE
     ## 4 1.2.3 TRUE FALSE
-    ## 
+    ##
     ## [[2]]
     ##          x1        x2 x3
     ## 1    number character NA
     ## 2    number character NA
     ## 3    number    number NA
     ## 4 character   logical NA
-    ## 
+    ##
     ## [[3]]
     ##   Column_ID number character logical
     ## 1         1      3         1       0
@@ -126,10 +126,10 @@ library(tidyverse)
 
 ``` r
 # Dummy dataframe
-dat <- data.frame(x=sample(letters[1:3],20,TRUE), 
+dat <- data.frame(x=sample(letters[1:3],20,TRUE),
                   y=sample(letters[1:3],20,TRUE),
                   w=as.numeric(sample(0:50,20,TRUE)),
-                  z=sample(letters[1:3],20,TRUE), 
+                  z=sample(letters[1:3],20,TRUE),
                   b = as.logical(sample(0:1,20,TRUE)),
                   a=sample(0:100,20,TRUE),
                   stringsAsFactors=FALSE)
@@ -165,7 +165,7 @@ impute(dat,method = "mode") %>% head()
 md_new()
 ```
 
-    ## 
+    ##
     ## |    |    |
     ## |:---|:---|
     ## |    |    |
@@ -176,7 +176,7 @@ md_new()
 md_new(nrow = 3, ncol = 3)
 ```
 
-    ## 
+    ##
     ## |    |    |    |
     ## |:---|:---|:---|
     ## |    |    |    |
@@ -188,7 +188,7 @@ md_new(nrow = 3, ncol = 3)
 md_new(nrow = 1, align = "c")
 ```
 
-    ## 
+    ##
     ## |    |    |
     ## |:--:|:--:|
     ## |    |    |
@@ -197,7 +197,7 @@ md_new(nrow = 1, align = "c")
 md_new(nrow = 1, align = "r")
 ```
 
-    ## 
+    ##
     ## |    |    |
     ## |---:|---:|
     ## |    |    |
@@ -208,7 +208,7 @@ h <- c("foo", "boo")
 md_new(header = h)
 ```
 
-    ## 
+    ##
     ## | foo| boo|
     ## |:---|:---|
     ## |    |    |
@@ -220,7 +220,7 @@ md_new(header = h)
 md_data(mtcars, row.index = 1:3, col.index = 1:4)
 ```
 
-    ## 
+    ##
     ## |    |mpg|cyl|disp|hp|
     ## |:---|---:|---:|---:|---:|
     ## |Mazda RX4|21.0|6|160|110|
@@ -232,7 +232,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4)
 md_data(mtcars, row.index = 1:3, col.index = 1:4, align = "r")
 ```
 
-    ## 
+    ##
     ## |    |mpg|cyl|disp|hp|
     ## |:---|---:|---:|---:|---:|
     ## |Mazda RX4|21.0|6|160|110|
@@ -244,7 +244,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, align = "r")
 md_data(mtcars, row.index = 1:3, col.index = 1:4, header = c("a","b","c","d"))
 ```
 
-    ## 
+    ##
     ## |    |a|b|c|d|
     ## |:---|---:|---:|---:|---:|
     ## |Mazda RX4|21.0|6|160|110|
@@ -256,7 +256,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, header = c("a","b","c","d"))
 md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
 ```
 
-    ## 
+    ##
     ## |mpg|cyl|disp|hp|
     ## |---:|---:|---:|---:|
     ## |21|6|160|110|
@@ -266,7 +266,7 @@ md_data(mtcars, row.index = 1:3, col.index = 1:4, row.names = F)
 User Scenario
 -------------
 
--   Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `impute()` to deal with missing data with mean/median/mode. The resulting data frame can be output to markdown syntax with `md_data()`. Your can also use `md_new()` to create a empty markdown table.
+-   Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `impute()` to deal with missing data with mean/median/mode. The resulting data frame can be output to markdown syntax with `md_data()`. You can also use `md_new()` to create a empty markdown table.
 
 Existing features in R and Python ecosystem similar to `tidyplus`
 -----------------------------------------------------------------

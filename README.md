@@ -3,7 +3,7 @@
 <img src="tidypluslogo.png" align="right" border="none" width="250" height="250"/>TidyPlusR: a tool for data wrangling
 ======================================================================================================================
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues) [![Build Status](https://travis-ci.org/UBC-MDS/tidyplusR.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusR)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues) [![Build Status](https://travis-ci.org/UBC-MDS/tidyplusR.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusR) [![codecov](https://codecov.io/gh/UBC-MDS/tidyplusR/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/tidyplusR)
 
 Contributors:
 -------------
@@ -36,7 +36,7 @@ devtools::install_github("UBC-MDS/tidyplusR")
 Functions included:
 -------------------
 
-> Three main parts include different functions in `tidyplusR`
+Three main parts include different functions in `tidyplusR`
 
 -   **Data Manipulation** : Datatype cleansing
     -   `typemix` \* The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.
@@ -147,12 +147,12 @@ impute(dat,method = "mode") %>% head()
 ```
 
     ##   x y     w z     b     a
-    ## 1 a c 31.89 a FALSE 37.00
-    ## 2 a a 36.00 a FALSE 15.00
-    ## 3 b c 31.89 c FALSE 70.00
-    ## 4 b a 28.00 a FALSE 62.85
-    ## 5 a b 31.89 a FALSE 62.85
-    ## 6 a a 18.00 c FALSE 43.00
+    ## 1 b c 24.93 b  TRUE 78.00
+    ## 2 a a  3.00 b FALSE 56.00
+    ## 3 c c 24.93 b  TRUE 98.00
+    ## 4 a c  0.00 b  TRUE 78.34
+    ## 5 c b 24.93 b  TRUE 78.34
+    ## 6 a a 15.00 b FALSE 69.00
 
 #### Markdown table
 

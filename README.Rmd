@@ -9,6 +9,7 @@ output: github_document
 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 [![Build Status](https://travis-ci.org/UBC-MDS/tidyplusR.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusR)
+[![codecov](https://codecov.io/gh/UBC-MDS/tidyplusR/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/tidyplusR)
 
 ## Contributors:
 

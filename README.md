@@ -1,21 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-TidyPlusR: a tool for data wrangling
-====================================
+<img src="tidypluslogo.png" align="right" border="none" width="250" height="250"/>TidyPlusR: a tool for data wrangling
+======================================================================================================================
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
-
-[![HitCount](https://hitt.herokuapp.com/tidyplus_python.svg..)](https://github.com/tidyplus_python)
-
-[![GitHub commit](https://img.shields.io/github/commits-since/UBC-MDS/tidyplus_python/v0.svg)](https://github.com/UBC-MDS/tidyplus_python/commit)
-
-[![Downloads](https://img.shields.io/github/downloads/UBC-MDS/tidyplus_python/total.svg)](https://github.com/UBC-MDS/tidyplus_python/graphs/traffic)
-
-[![forks](https://img.shields.io/github/forks/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/network)
-
-[![issues](https://img.shields.io/github/issues/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/issues)
-
-[![Build Status](https://travis-ci.org/UBC-MDS/tidyplusR.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusR)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues) [![Build Status](https://travis-ci.org/UBC-MDS/tidyplusR.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusR)
 
 Contributors:
 -------------
@@ -132,14 +120,14 @@ cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ────────
 
     ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
     ## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
     ## ✔ tidyr   0.8.0     ✔ stringr 1.3.0
     ## ✔ readr   1.1.1     ✔ forcats 0.3.0
 
-    ## ── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ─────────────────
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -168,12 +156,12 @@ impute(dat,method = "mode") %>% head()
 ```
 
     ##   x y     w z     b     a
-    ## 1 a a 40.22 c  TRUE  0.00
-    ## 2 b a 31.00 c FALSE 79.00
-    ## 3 c a 40.22 b  TRUE 57.00
-    ## 4 b c 36.00 a FALSE 55.98
-    ## 5 a a 40.22 a FALSE 55.98
-    ## 6 c b 43.00 a  TRUE 32.00
+    ## 1 b a 10.78 c  TRUE 94.00
+    ## 2 c b  4.00 c FALSE 79.00
+    ## 3 c a 10.78 a FALSE 21.00
+    ## 4 b a 36.00 a  TRUE 85.43
+    ## 5 c c 10.78 a  TRUE 85.43
+    ## 6 b a 26.00 b  TRUE 18.00
 
 #### Markdown table
 

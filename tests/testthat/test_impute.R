@@ -85,8 +85,18 @@ test_that("Method input is correct - mean median mode", {
 })
 
 
-# These should raise an error.
-test_that("dataframe object is not list or dataframe", {
+## Check if mode can handle less than two non-null values
+
+test_that("dataframe with less than two values should impute with mean", {
+  data <- c(2, NA, NA)
+  df <- data.frame(data)
+  expect_equal(impute(df, method="mode"), impute(df, method="mean") )
+})
+
+
+# These should raise error if input outputs types and shape are different
+
+test_that("expect input and output of impute to be dataframe", {
   data <- read.csv("data/impute_data.csv")
   new_data <- impute(data,method="mean")
   # Expected outputs:
@@ -96,7 +106,7 @@ test_that("dataframe object is not list or dataframe", {
   expect_equal(is.data.frame(new_data), TRUE)
 })
 
-test_that("dataframe size miss match", {
+test_that("expect dimension of input and output dataframe to match", {
   data <- read.csv("data/impute_data.csv")
   new_data <- impute(data,method="mean")
   expect_equal(length(data) == length(new_data), TRUE)
